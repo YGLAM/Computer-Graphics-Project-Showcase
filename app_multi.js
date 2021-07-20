@@ -8,9 +8,9 @@ function main() {
 
   var lastUpdateTime = (new Date).getTime();
 
-  var cubeRx = 90.0; //pitch?
+  var cubeRx = 90.0; //yaw?
   var cubeRy = 0.0; //roll?
-  var cubeRz = 0.0; //yaw?
+  var cubeRz = 0.0; //pitch?
   var cubeS  = 0.5;
 
   utils.resizeCanvasToDisplaySize(gl.canvas);
@@ -19,19 +19,14 @@ function main() {
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   gl.enable(gl.DEPTH_TEST);
 
-  var positionAttributeLocation = gl.getAttribLocation(program, "in_position");  
-  var normalAttributeLocation = gl.getAttribLocation(program, "in_normal");
+  var positionAttributeLocation = gl.getAttribLocation(program, "in_position");
   var uvAttributeLocation = gl.getAttribLocation(program, "in_uv");
 
-  var normalMatrixLocation = gl.getUniformLocation(program, "nMatrix");
-  var materialDiffColorHandle = gl.getUniformLocation(program, 'mDiffColor');
-  var lightDirectionHandle = gl.getUniformLocation(program, 'lightDirection');
-  var lightColorHandle = gl.getUniformLocation(program, 'lightColor');
   var matrixLocation = gl.getUniformLocation(program, "matrix");  
 
-  var textLocation = gl.getUniformLocation(program, "u_texture");
+  var texturePositionHandle = gl.getUniformLocation(program, "u_texture");
 
-  var perspectiveMatrix = utils.MakePerspective(69, gl.canvas.width/gl.canvas.height, 0.1, 100.0);
+  var perspectiveMatrix = utils.MakePerspective(90, gl.canvas.width/gl.canvas.height, 0.1, 100.0);
     
   vao = gl.createVertexArray();
   gl.bindVertexArray(vao);
@@ -41,12 +36,6 @@ function main() {
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(modelVertices), gl.STATIC_DRAW);
   gl.enableVertexAttribArray(positionAttributeLocation);
   gl.vertexAttribPointer(positionAttributeLocation, 3, gl.FLOAT, false, 0, 0);
-
-  var normalBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, normalBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(modelNormals), gl.STATIC_DRAW);
-  gl.enableVertexAttribArray(normalAttributeLocation);
-  gl.vertexAttribPointer(normalAttributeLocation, 3, gl.FLOAT, false, 0, 0);
 
   var uvBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, uvBuffer);
@@ -101,31 +90,21 @@ function main() {
     gl.enable(gl.DEPTH_TEST);
     gl.enable(gl.CULL_FACE);
 
-    var worldMatrix;
+    var worldMatrix = new Array();
     var viewMatrix;
     var viewWorldMatrix;
     var projectionMatrix;
     for (let i = 0; i < 3; i++) {
-        worldMatrix = utils.MakeWorld(10.0*(i-1), 0.0, -5.0, cubeRx, cubeRy, cubeRz, 0.01);
+        worldMatrix[i] = utils.MakeWorld(15.0*(i-1), 0.0, -5.0, cubeRx, cubeRy, cubeRz, 0.01);
         viewMatrix = utils.MakeView(0.0, 5.0, 15.0, 0.0, 0.0);
-        viewWorldMatrix = utils.multiplyMatrices(viewMatrix, worldMatrix);
-
-        // cubeNormalMatrix = utils.invertMatrix(utils.transposeMatrix(viewWorldMatrix));
-        // gl.uniformMatrix4fv(normalMatrixLocation, gl.FALSE, utils.transposeMatrix(cubeNormalMatrix));      
+        viewWorldMatrix = utils.multiplyMatrices(viewMatrix, worldMatrix[i]);    
 
         projectionMatrix = utils.multiplyMatrices(perspectiveMatrix, viewWorldMatrix);
-    
         gl.uniformMatrix4fv(matrixLocation, gl.FALSE, utils.transposeMatrix(projectionMatrix));
-
-        // var dirLightTransformed = utils.multiplyMatrix3Vector3(utils.sub3x3from4x4(viewMatrix), directionalLight);
-        // gl.uniform3fv(lightDirectionHandle,  dirLightTransformed);
-
-        // gl.uniform3fv(materialDiffColorHandle, cubeMaterialColor);
-        // gl.uniform3fv(lightColorHandle,  directionalLightColor);
 
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, texture);
-        gl.uniform1i(textLocation, 0);
+        gl.uniform1i(texturePositionHandle, 0);
 
         gl.bindVertexArray(vao);
         gl.drawElements(gl.TRIANGLES, modelIndices.length, gl.UNSIGNED_SHORT, 0 );
@@ -151,8 +130,9 @@ async function init(){
 
     await utils.loadFiles([shaderDir + 'vs.glsl', shaderDir + 'fs.glsl'], function (shaderText) {
       var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
-      console.log(vertexShader);
+      console.log("vs: " + vertexShader);
       var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
+      console.log("fs: " + vertexShader);
       program = utils.createProgram(gl, vertexShader, fragmentShader);
 
     });
