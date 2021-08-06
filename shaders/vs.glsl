@@ -4,13 +4,13 @@ in vec3 in_position;
 in vec3 in_normal;
 in vec2 in_uv;
 
-out vec2 fs_uv;
-out vec3 fs_normal;
 out vec3 fs_position;
+out vec3 fs_normal;
+out vec2 fs_uv;
 
-uniform mat4 nMatrix;
-uniform mat4 pMatrix;
-uniform mat4 matrix;
+uniform mat4 nMatrix;//normalsMatrix
+uniform mat4 pMatrix;//utils.transposeMatrix(viewWorldMatrix)
+uniform mat4 matrix;//  projectionMatrix = utils.multiplyMatrices(perspectiveMatrix, viewWorldMatrix);
 
 void main() {
   fs_uv = in_uv;
