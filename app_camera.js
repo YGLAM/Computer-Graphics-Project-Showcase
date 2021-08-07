@@ -54,7 +54,7 @@ function main() {
 
     var texturePositionHandle = gl.getUniformLocation(program, "u_texture");
 
-    var perspectiveMatrix = utils.MakePerspective(90, gl.canvas.width / gl.canvas.height, 0.1, 100.0);
+    var perspectiveMatrix = utils.MakePerspective(45, gl.canvas.width / gl.canvas.height, 0.1, 100.0);
 
     vao = gl.createVertexArray();
     gl.bindVertexArray(vao);
@@ -87,7 +87,7 @@ function main() {
 
     // Asynchronously load an image
     var image = new Image();
-    image.src = baseDir + "assets/boat/boat_diffuse_png.png";
+    image.src = baseDir + "assets/pedestal/pedestal2.png";
     image.onload = function () {
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
@@ -132,7 +132,7 @@ function main() {
         var dirLightTransformed;
         var lightPosTransformed;
         for (let i = 0; i < 3; i++) {
-            worldMatrix[i] = utils.MakeWorld(15.0 * (i - 1), 0.0, -5.0, cubeRx, cubeRy, cubeRz, 0.01);
+            worldMatrix[i] = utils.MakeWorld(15.0 * (i - 1), 0.0, -15.0, cubeRx, cubeRy, cubeRz, 0.5);
             viewMatrix = utils.MakeView(0.0, 5.0, 15.0, 0.0, 0.0);
             viewWorldMatrix = utils.multiplyMatrices(viewMatrix, worldMatrix[i]);
 
@@ -191,7 +191,7 @@ async function init() {
         program = utils.createProgram(gl, vertexShader, fragmentShader);
     });
 
-    var objStr = await utils.get_objstr(baseDir + "assets/boat/boat.obj");
+    var objStr = await utils.get_objstr(baseDir + "assets/pedestal/pedestal.obj");
     objModel = new OBJ.Mesh(objStr);
     modelVertices = objModel.vertices; //Array of vertices
     modelNormals = objModel.vertexNormals; //Array of normals
