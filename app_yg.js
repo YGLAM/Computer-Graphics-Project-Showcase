@@ -21,7 +21,6 @@ function main() {
 
     //Define material color
     var materialColor = [0.5, 0.5, 0.5];
-    var cubeS = 0.5;
 
     utils.resizeCanvasToDisplaySize(gl.canvas);
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
@@ -64,20 +63,23 @@ async function init() {
         document.write("GL context not opened");
         return;
     }
-
-    await utils.loadFiles([shaderDir + 'vs.glsl', shaderDir + 'fs.glsl'], function (shaderText) {
+    await utils.loadFiles([shaderDir + 'vs.glsl', shaderDir + 'fs.glsl'],
+     function (shaderText) {
         var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
-        console.log("vs: " + vertexShader);
         var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
-        console.log("fs: " + fragmentShader);
         program = utils.createProgram(gl, vertexShader, fragmentShader);
     });
-    //Loads Up every single object into a list
-    //Still to do 
-    objModel = utils.initObject(baseDir + "assets/boat/boat.obj");
+    loadSceneAssets();
     gl.useProgram(program);
 
     main();
 }
 
+function loadSceneAssets(){
+    models[roomInfo.id]      = initObject(roomInfo);
+    models[pedestalInfo.id]  = initObject(pedestalInfo);
+    models[boatInfo.id]      = initObject(boatInfo);
+    models[xwingInfo.id]     = initObject(xwingInfo);
+    models[worldInfo.id]     = initObject(worldInfo);
+}
 window.onload = init;
