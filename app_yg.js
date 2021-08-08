@@ -1,11 +1,5 @@
-var program;
-var gl;
-var shaderDir;
-var baseDir;
-var objModel;
-
-function main() {
-
+var main = function() {
+    nodes.sceneGraph();
     //define directional light, shouldn't these parameters go to the fragment Shader ?
     var dirLightAlpha = -utils.degToRad(60);
     var dirLightBeta = -utils.degToRad(120);
@@ -21,36 +15,13 @@ function main() {
 
     //Define material color
     var materialColor = [0.5, 0.5, 0.5];
-
-    utils.resizeCanvasToDisplaySize(gl.canvas);
-    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-    gl.clearColor(0, 0, 0, 0);
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    gl.enable(gl.DEPTH_TEST);
-
-
     var perspectiveMatrix = utils.MakePerspective(90, gl.canvas.width / gl.canvas.height, 0.1, 100.0);
-
-
     // Asynchronously load an image
-    var image = new Image();
-    image.src = baseDir + "assets/boat/boat_diffuse_png.png";
-    image.onload = function () {
-        gl.bindTexture(gl.TEXTURE_2D, texture);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-
-        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-
-        gl.generateMipmap(gl.TEXTURE_2D);
-    };
-
     draw.scene();
 }
 
 
-async function init() {
+var init = async function() {
 
     var path = window.location.pathname;
     var page = path.split("/").pop();
@@ -69,17 +40,11 @@ async function init() {
         var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
         program = utils.createProgram(gl, vertexShader, fragmentShader);
     });
-    loadSceneAssets();
+    nodes.loadSceneAssets();
     gl.useProgram(program);
 
     main();
 }
 
-function loadSceneAssets(){
-    models[roomInfo.id]      = initObject(roomInfo);
-    models[pedestalInfo.id]  = initObject(pedestalInfo);
-    models[boatInfo.id]      = initObject(boatInfo);
-    models[xwingInfo.id]     = initObject(xwingInfo);
-    models[worldInfo.id]     = initObject(worldInfo);
-}
+
 window.onload = init;

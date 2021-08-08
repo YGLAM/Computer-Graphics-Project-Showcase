@@ -15,7 +15,7 @@ function main() {
     Math.sin(dirLightAlpha),
     Math.cos(dirLightAlpha) * Math.sin(dirLightBeta)];
     var directionalLightColor = [0.85, 0.85, 0.85];
-    
+
     var lightPos = [20.0, 3.0, 0.0, 1.0];
     var lightTarget = 10;
     var lightDecay = 0;
@@ -56,7 +56,7 @@ function main() {
     var texturePositionHandle = new Array();
     var texture = new Array();
 
-    
+
     for(let i = 0; i < 2; i++) {
         positionAttributeLocation[i] = gl.getAttribLocation(program, "in_position");
         normalAttributeLocation[i] = gl.getAttribLocation(program, "in_normal");
@@ -132,7 +132,7 @@ function main() {
     gl.bindTexture(gl.TEXTURE_2D, texture[1]);
 
     // Asynchronously load an image
-    var image1 = new Image();
+    /*var image1 = new Image();
     image1.src = baseDir + "assets/pedestal/pedestal2.png";
     image1.onload = function () {
         gl.bindTexture(gl.TEXTURE_2D, texture[1]);
@@ -143,7 +143,7 @@ function main() {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 
         gl.generateMipmap(gl.TEXTURE_2D);
-    };
+    };*/
 
     drawScene();
 
@@ -240,7 +240,7 @@ async function init() {
     modelIndices = new Array();
     modelTexCoords = new Array();
     worldMatrix = new Array();
-    
+
     var boatStr = await utils.get_objstr(baseDir + "assets/boat/boat.obj");
     boatModel = new OBJ.Mesh(boatStr);
     modelVertices[0] = boatModel.vertices; //Array of vertices
@@ -263,4 +263,3 @@ async function init() {
 }
 
 window.onload = init;
-
