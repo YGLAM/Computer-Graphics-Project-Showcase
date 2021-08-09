@@ -54,7 +54,7 @@ function main() {
     var matrixLocation = new Array();
 
     var texturePositionHandle = new Array();
-    var texture = new Array();
+    texture = new Array();
 
 
     for(let i = 0; i < 2; i++) {
@@ -109,9 +109,7 @@ function main() {
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(modelIndices[i]), gl.STATIC_DRAW);
     }
 
-    texture[0] = gl.createTexture();
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, texture[0]);
+    loadTextures();
 
     // Asynchronously load an image
     var image0 = new Image();
