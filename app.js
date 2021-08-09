@@ -1,6 +1,6 @@
 var program;
 var gl;
-var shaderDir; 
+var shaderDir;
 var baseDir;
 var objModel;
 
@@ -15,16 +15,16 @@ function main() {
 
   utils.resizeCanvasToDisplaySize(gl.canvas);
   gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-  gl.clearColor(0, 0, 0, 0); 
+  gl.clearColor(0, 0, 0, 0);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   gl.enable(gl.DEPTH_TEST);
-
-  var positionAttributeLocation = gl.getAttribLocation(program, "in_position");  
-  var uvAttributeLocation = gl.getAttribLocation(program, "in_uv");  
-  var matrixLocation = gl.getUniformLocation(program, "matrix");  
+/*
+  var positionAttributeLocation = gl.getAttribLocation(program, "in_position");
+  var uvAttributeLocation = gl.getAttribLocation(program, "in_uv");
+  var matrixLocation = gl.getUniformLocation(program, "matrix");
   var textLocation = gl.getUniformLocation(program, "u_texture");
   var perspectiveMatrix = utils.MakePerspective(90, gl.canvas.width/gl.canvas.height, 0.1, 100.0);
-    
+*/    
   vao = gl.createVertexArray();
   gl.bindVertexArray(vao);
 
@@ -42,7 +42,7 @@ function main() {
 
   var indexBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(modelIndices), gl.STATIC_DRAW); 
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(modelIndices), gl.STATIC_DRAW);
 
   var texture = gl.createTexture();
   gl.activeTexture(gl.TEXTURE0);
@@ -73,7 +73,7 @@ function main() {
       cubeRz += deltaC;
     }
     worldMatrix = utils.MakeWorld(  0.0, 0.0, 0.0, cubeRx, cubeRy, cubeRz, 1.0);
-    lastUpdateTime = currentTime;               
+    lastUpdateTime = currentTime;
   }
 
 
@@ -91,7 +91,7 @@ function main() {
     var viewMatrix = utils.MakeView(0.0, 5.0, 10.0, 0.0, 0.0);
     var viewWorldMatrix = utils.multiplyMatrices(viewMatrix, worldMatrix);
     var projectionMatrix = utils.multiplyMatrices(perspectiveMatrix, viewWorldMatrix);
-   
+
     gl.uniformMatrix4fv(matrixLocation, gl.FALSE, utils.transposeMatrix(projectionMatrix));
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -99,13 +99,13 @@ function main() {
 
     gl.bindVertexArray(vao);
     gl.drawElements(gl.TRIANGLES, objModel.indices.length, gl.UNSIGNED_SHORT, 0 );
-    
+
     window.requestAnimationFrame(drawScene);
   }
 }
 
 async function init(){
-  
+
     var path = window.location.pathname;
     var page = path.split("/").pop();
     baseDir = window.location.href.replace(page, '');
@@ -125,7 +125,7 @@ async function init(){
       program = utils.createProgram(gl, vertexShader, fragmentShader);
 
     });
-    
+
     var objStr = await utils.get_objstr(baseDir+"assets/boat/boat.obj");
     objModel = new OBJ.Mesh(objStr);
     modelVertices = objModel.vertices; //Array of vertices
@@ -133,7 +133,7 @@ async function init(){
     modelIndices = objModel.indices; //Array of indices
     modelTexCoords = objModel.textures; //Array of uv coordinates
     gl.useProgram(program);
-    
+
     main();
 }
 

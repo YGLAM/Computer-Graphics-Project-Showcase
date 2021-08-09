@@ -1,5 +1,5 @@
 var main = function() {
-    nodes.sceneGraph();
+
     //define directional light, shouldn't these parameters go to the fragment Shader ?
     var dirLightAlpha = -utils.degToRad(60);
     var dirLightBeta = -utils.degToRad(120);
@@ -16,6 +16,7 @@ var main = function() {
     //Define material color
     var materialColor = [0.5, 0.5, 0.5];
     var perspectiveMatrix = utils.MakePerspective(90, gl.canvas.width / gl.canvas.height, 0.1, 100.0);
+    nodes.sceneGraph();
     // Asynchronously load an image
     draw.scene();
 }
