@@ -227,7 +227,7 @@ async function init() {
         return;
     }
 
-    await utils.loadFiles([shaderDir + 'vs.glsl', shaderDir + 'fs.glsl'], function (shaderText) {
+    await utils.loadFiles([shaderDir + 'vertices/vs.glsl', shaderDir + 'fragments/fs.glsl'], function (shaderText) {
         var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
         console.log("vs: " + vertexShader);
         var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);

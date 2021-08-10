@@ -44,7 +44,3 @@ void main() {
     outColor = vec4(clamp(lambertColor, 0.0, 1.0),1.0) + texture(u_texture, fs_uv);
 
 }
-    // vec3 lightDirNorm = normalize(lightDirection);
-    // vec3 nNormal = normalize(fs_normal);
-    // vec3 lambertColor = mDiffColor * lightColor * dot(-lightDirNorm,nNormal);
-    // outColor = vec4(clamp(lambertColor, 0.0, 1.0),1.0) + texture(u_texture, fs_uv);
