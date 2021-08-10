@@ -35,17 +35,19 @@ var init = async function() {
         document.write("GL context not opened");
         return;
     }
-    await utils.loadFiles([shaderDir + 'vs.glsl', shaderDir + 'fs.glsl'],
-     function (shaderText) {
-        var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
-        var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
-        program = utils.createProgram(gl, vertexShader, fragmentShader);
-    });
+    loadProgram();
     nodes.loadSceneAssets();
     gl.useProgram(program);
 
     main();
 }
-
+async function loadProgram(){
+  await utils.loadFiles([shaderDir + 'vs.glsl', shaderDir + 'fs.glsl'],
+   function (shaderText) {
+      var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
+      var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
+      program = utils.createProgram(gl, vertexShader, fragmentShader);
+  });
+}
 
 window.onload = init;
