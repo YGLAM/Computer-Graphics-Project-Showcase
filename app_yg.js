@@ -15,10 +15,9 @@ var main = function() {
 
     //Define material color
     var materialColor = [0.5, 0.5, 0.5];
-    var perspectiveMatrix = utils.MakePerspective(90, gl.canvas.width / gl.canvas.height, 0.1, 100.0);
     nodes.sceneGraph();
     // Asynchronously load an image
-    draw.scene();
+    draw.cameraScene();
 }
 
 
@@ -35,17 +34,19 @@ var init = async function() {
         document.write("GL context not opened");
         return;
     }
-    await utils.loadFiles([shaderDir + 'vs.glsl', shaderDir + 'fs.glsl'],
-     function (shaderText) {
-        var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
-        var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
-        program = utils.createProgram(gl, vertexShader, fragmentShader);
-    });
+    loadProgram();
     nodes.loadSceneAssets();
     gl.useProgram(program);
 
     main();
 }
-
+async function loadProgram(){
+  await utils.loadFiles([shaderDir + 'vs.glsl', shaderDir + 'fs.glsl'],
+   function (shaderText) {
+      var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
+      var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
+      program = utils.createProgram(gl, vertexShader, fragmentShader);
+  });
+}
 
 window.onload = init;
