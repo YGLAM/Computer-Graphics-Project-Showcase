@@ -12,7 +12,8 @@ function main() {
 
     var directionalLight = [Math.cos(dirLightAlpha) * Math.cos(dirLightBeta),
     Math.sin(dirLightAlpha),
-    Math.cos(dirLightAlpha) * Math.sin(dirLightBeta)];
+    Math.cos(dirLightAlpha) * Math.sin(dirLightBeta)
+    ];
     var directionalLightColor = [0.85, 0.85, 0.85];
 
     var lightPos = [20.0, 3.0, 0.0, 1.0];
@@ -34,28 +35,28 @@ function main() {
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.enable(gl.DEPTH_TEST);
-/*
-    var positionAttributeLocation = gl.getAttribLocation(program, "in_position");
-    var normalAttributeLocation = gl.getAttribLocation(program, "in_normal");
-    var uvAttributeLocation = gl.getAttribLocation(program, "in_uv");
-
-    var materialDiffColorHandle = gl.getUniformLocation(program, 'mDiffColor');
-    var lightColorHandle = gl.getUniformLocation(program, 'lightColor');
-
-    var lightDirectionHandle = gl.getUniformLocation(program, 'lightDirection');
-
-    var lightPosHandle = gl.getUniformLocation(program, "lightPos");
-    var lightTargetHandle = gl.getUniformLocation(program, "lightTarget");
-    var lightDecayHandle = gl.getUniformLocation(program, "lightDecay");
-
-    var normalMatrixPositionHandle = gl.getUniformLocation(program, "nMatrix");
-    var vertexMatrixPositionHandle = gl.getUniformLocation(program, "pMatrix");
-    var matrixLocation = gl.getUniformLocation(program, "matrix");
-
-    var texturePositionHandle = gl.getUniformLocation(program, "u_texture");
-
-    var perspectiveMatrix = utils.MakePerspective(45, gl.canvas.width / gl.canvas.height, 0.1, 100.0);
-*/
+    /*
+        var positionAttributeLocation = gl.getAttribLocation(program, "in_position");
+        var normalAttributeLocation = gl.getAttribLocation(program, "in_normal");
+        var uvAttributeLocation = gl.getAttribLocation(program, "in_uv");
+    
+        var materialDiffColorHandle = gl.getUniformLocation(program, 'mDiffColor');
+        var lightColorHandle = gl.getUniformLocation(program, 'lightColor');
+    
+        var lightDirectionHandle = gl.getUniformLocation(program, 'lightDirection');
+    
+        var lightPosHandle = gl.getUniformLocation(program, "lightPos");
+        var lightTargetHandle = gl.getUniformLocation(program, "lightTarget");
+        var lightDecayHandle = gl.getUniformLocation(program, "lightDecay");
+    
+        var normalMatrixPositionHandle = gl.getUniformLocation(program, "nMatrix");
+        var vertexMatrixPositionHandle = gl.getUniformLocation(program, "pMatrix");
+        var matrixLocation = gl.getUniformLocation(program, "matrix");
+    
+        var texturePositionHandle = gl.getUniformLocation(program, "u_texture");
+    
+        var perspectiveMatrix = utils.MakePerspective(45, gl.canvas.width / gl.canvas.height, 0.1, 100.0);
+    */
     vao = gl.createVertexArray();
     gl.bindVertexArray(vao);
 
@@ -148,7 +149,7 @@ function main() {
             gl.uniform3fv(lightDirectionHandle, dirLightTransformed);
 
             lightPosTransformed = utils.multiplyMatrixVector(viewMatrix, lightPos);
-            gl.uniform3fv(lightPosHandle, lightPosTransformed.slice(0,3));
+            gl.uniform3fv(lightPosHandle, lightPosTransformed.slice(0, 3));
 
             gl.uniform3fv(materialDiffColorHandle, materialColor);
             gl.uniform3fv(lightColorHandle, directionalLightColor);

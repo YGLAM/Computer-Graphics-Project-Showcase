@@ -57,7 +57,8 @@ function main() {
     texture = new Array();
 
 
-    for(let i = 0; i < 2; i++) {
+    // for each object
+    for (let i = 0; i < 2; i++) {
         positionAttributeLocation[i] = gl.getAttribLocation(program, "in_position");
         normalAttributeLocation[i] = gl.getAttribLocation(program, "in_normal");
         uvAttributeLocation[i] = gl.getAttribLocation(program, "in_uv");
@@ -82,7 +83,8 @@ function main() {
 
     var vaos = new Array();
 
-    for(let i = 0; i < 2; i++) {
+    // for each object
+    for (let i = 0; i < 2; i++) {
         vaos[i] = gl.createVertexArray();
         gl.bindVertexArray(vaos[i]);
 
@@ -190,7 +192,7 @@ function main() {
             gl.uniform3fv(lightDirectionHandle[i], dirLightTransformed);
 
             lightPosTransformed = utils.multiplyMatrixVector(viewMatrix, lightPos);
-            gl.uniform3fv(lightPosHandle[i], lightPosTransformed.slice(0,3));
+            gl.uniform3fv(lightPosHandle[i], lightPosTransformed.slice(0, 3));
 
             gl.uniform3fv(materialDiffColorHandle[i], materialColor);
             gl.uniform3fv(lightColorHandle[i], directionalLightColor);
