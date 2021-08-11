@@ -188,6 +188,7 @@ function main() {
             normalMatrix = utils.invertMatrix(utils.transposeMatrix(viewWorldMatrix));
             gl.uniformMatrix4fv(normalMatrixPositionHandle[i], gl.FALSE, utils.transposeMatrix(normalMatrix));
 
+
             dirLightTransformed = utils.multiplyMatrix3Vector3(utils.sub3x3from4x4(viewMatrix), directionalLight);
             gl.uniform3fv(lightDirectionHandle[i], dirLightTransformed);
 
@@ -200,6 +201,7 @@ function main() {
             gl.uniform1f(lightTargetHandle[i], lightTarget);
             gl.uniform1f(lightDecayHandle[i], lightDecay);
 
+            
             gl.activeTexture(gl.TEXTURE0);
             gl.bindTexture(gl.TEXTURE_2D, texture[i]);
             gl.uniform1i(texturePositionHandle[i], 0);

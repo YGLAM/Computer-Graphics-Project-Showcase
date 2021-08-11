@@ -8,14 +8,14 @@ in vec2 fs_uv;
 
 out vec4 outColor;
 
-uniform vec3 lightDirection; // directional light direction vec
+uniform vec3 dirDirection; // directional light direction vec
 
-uniform vec3 lightPos; //point light position
-uniform float lightTarget; //point light target
-uniform float lightDecay; //point light decay
+uniform vec3 pointPos; //point light position
+uniform float pointTarget; //point light target
+uniform float pointDecay; //point light decay
 
 uniform vec3 mDiffColor; //material diffuse color
-uniform vec3 lightColor; //directional light color
+uniform vec3 dirColor; //directional light color
 
 uniform sampler2D u_texture;
 
@@ -34,10 +34,10 @@ uniform sampler2D u_texture;
 }*/
 
 void main() {
-    vec3 lightColorA = lightColor * pow(lightTarget / length(lightPos - fs_position), lightDecay);
+    vec3 lightColorA = dirColor * pow(pointTarget / length(pointPos - fs_position), pointDecay);
 
     vec3 nNormal = normalize(fs_normal);
-    vec3 lightDirNorm = normalize(lightPos - fs_position);
+    vec3 lightDirNorm = normalize(pointPos - fs_position);
     // vec3 eyeDirNorm = normalize(lightPos - fs_position); ???
     vec3 lambertColor = mDiffColor * lightColorA * dot(lightDirNorm, nNormal);
 

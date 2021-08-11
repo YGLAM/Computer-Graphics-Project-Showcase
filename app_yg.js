@@ -10,14 +10,22 @@ var main = function () {
     var directionalLightColor = [0.85, 0.85, 0.85];
     var materialColor = [0.5, 0.5, 0.5];
 
-    var materialDiffColorHandle = gl.getUniformLocation(program, 'mDiffColor');
-    var lightColorHandle = gl.getUniformLocation(program, 'lightColor');
+    console.log(entities);
+    // For each entity, link its light locations to the variables of the fragment shader
+    entities.forEach(function (entity) {
+        console.log(entity);
+        gl.useProgram(entity.drawInfo.programInfo);
+        //object = retrieveAsset(entity.drawInfo.name);
+        lights.lightLocations(entity);
+    });
+    // var materialDiffColorHandle = gl.getUniformLocation(program, 'mDiffColor');
+    // var lightColorHandle = gl.getUniformLocation(program, 'lightColor');
 
-    var lightDirectionHandle = gl.getUniformLocation(program, 'lightDirection');
+    // var lightDirectionHandle = gl.getUniformLocation(program, 'lightDirection');
 
-    var lightPosHandle = gl.getUniformLocation(program, "lightPos");
-    var lightTargetHandle = gl.getUniformLocation(program, "lightTarget");
-    var lightDecayHandle = gl.getUniformLocation(program, "lightDecay");
+    // var lightPosHandle = gl.getUniformLocation(program, "lightPos");
+    // var lightTargetHandle = gl.getUniformLocation(program, "lightTarget");
+    // var lightDecayHandle = gl.getUniformLocation(program, "lightDecay");
 
     var lightPos = [20.0, 3.0, 0.0, 1.0];
     var lightTarget = 10;
@@ -32,9 +40,9 @@ var main = function () {
     function cameraScene() {
         //Placeholder light parameters -- START
 
-        var aspect = gl.canvas.width / gl.canvas.height;
-        var perspectiveMatrix = utils.MakePerspective(90, aspect, 0.1, 100.0);
-        var viewMatrix = utils.MakeView(0.0, 10.0, 15.0, -15.0, 0.0);
+        aspect = gl.canvas.width / gl.canvas.height;
+        perspectiveMatrix = utils.MakePerspective(90, aspect, 0.1, 100.0);
+        viewMatrix = utils.MakeView(0.0, 10.0, 15.0, -15.0, 0.0);
 
         utils.resizeCanvasToDisplaySize(gl.canvas);
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
@@ -49,27 +57,30 @@ var main = function () {
         entities.forEach(function (entity) {
             gl.useProgram(entity.drawInfo.programInfo);
 
-            var viewWorldMatrix = utils.multiplyMatrices(viewMatrix, entity.worldMatrix);
-            var projectionMatrix = utils.multiplyMatrices(perspectiveMatrix, viewWorldMatrix);
+            viewWorldMatrix = utils.multiplyMatrices(viewMatrix, entity.worldMatrix);
+            projectionMatrix = utils.multiplyMatrices(perspectiveMatrix, viewWorldMatrix);
             gl.uniformMatrix4fv(entity.drawInfo.matrixLocation, gl.FALSE, utils.transposeMatrix(projectionMatrix));
 
             gl.uniformMatrix4fv(entity.drawInfo.vertexMatrixPositionHandle, gl.FALSE, utils.transposeMatrix(viewWorldMatrix));//Needs to be reviewed
 
-            var normalMatrix = utils.invertMatrix(utils.transposeMatrix(viewWorldMatrix));
+            normalMatrix = utils.invertMatrix(utils.transposeMatrix(viewWorldMatrix));
             gl.uniformMatrix4fv(entity.drawInfo.normalMatrixPositionHandle, gl.FALSE, utils.transposeMatrix(normalMatrix));
 
-            var dirLightTransformed = utils.multiplyMatrix3Vector3(utils.sub3x3from4x4(viewMatrix), directionalLight);
-            gl.uniform3fv(lightDirectionHandle, dirLightTransformed);
 
-            var lightPosTransformed = utils.multiplyMatrixVector(viewMatrix, lightPos);
-            gl.uniform3fv(lightPosHandle, lightPosTransformed.slice(0, 3));
+            //object = retrieveAsset(entity.drawInfo.name);
+            lights.setLightValues(entity);
+            // var dirLightTransformed = utils.multiplyMatrix3Vector3(utils.sub3x3from4x4(viewMatrix), directionalLight);
+            // gl.uniform3fv(lightDirectionHandle, dirLightTransformed);
 
-            gl.uniform3fv(materialDiffColorHandle, materialColor);
-            gl.uniform3fv(lightColorHandle, directionalLightColor);
+            // var lightPosTransformed = utils.multiplyMatrixVector(viewMatrix, lightPos);
+            // gl.uniform3fv(lightPosHandle, lightPosTransformed.slice(0, 3));
+            // gl.uniform1f(lightTargetHandle, lightTarget);
+            // gl.uniform1f(lightDecayHandle, lightDecay);
 
-            gl.uniform1f(lightTargetHandle, lightTarget);
-            gl.uniform1f(lightDecayHandle, lightDecay);
+            // gl.uniform3fv(materialDiffColorHandle, materialColor);
+            // gl.uniform3fv(lightColorHandle, directionalLightColor);
 
+            
             gl.activeTexture(gl.TEXTURE0);
             gl.bindTexture(gl.TEXTURE_2D, entity.drawInfo.textureRef[0]);
             gl.uniform1i(entity.drawInfo.textLocation, 0);
@@ -99,7 +110,9 @@ var init = async function () {
     await utils.loadFiles([shaderDir + '/vertices/vs.glsl', shaderDir + 'fragments/fs.glsl'],
     function (shaderText) {
         var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
+        console.log("vs: " + vertexShader);
         var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
+        console.log("fs: " + fragmentShader);
         program = utils.createProgram(gl, vertexShader, fragmentShader);
     });
         
@@ -109,7 +122,7 @@ var init = async function () {
     // assets["boat"] = boatModel;
 
     gl.useProgram(program);
-    
+
     await nodes.sceneGraph();
     main();
 }
