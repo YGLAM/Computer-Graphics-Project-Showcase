@@ -37,8 +37,8 @@ var main = function () {
         //Placeholder light parameters -- START
 
         aspect = gl.canvas.width / gl.canvas.height;
-        perspectiveMatrix = utils.MakePerspective(90, aspect, 0.1, 100.0);
-        viewMatrix = utils.MakeView(0.0, 10.0, 15.0, -15.0, 0.0);
+        perspectiveMatrix = utils.MakePerspective(60, aspect, 0.1, 100.0);
+        viewMatrix = utils.MakeView(0.0, 15.0, 25.0, -15.0, 0.0);
 
         utils.resizeCanvasToDisplaySize(gl.canvas);
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
