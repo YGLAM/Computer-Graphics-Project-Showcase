@@ -31,14 +31,32 @@ var main = function () {
     var lightTarget = 10;
     var lightDecay = 0;
 
+    var lastUpdateTime = (new Date).getTime();
     cameraScene();
 
     function animate() {
+        var currentTime = (new Date).getTime();
+        if (lastUpdateTime) {
+            var dt = (30 * (currentTime - lastUpdateTime)) / 1000.0;
+        }
+
         entities.forEach(function (entity) {
             if(entity.drawInfo.name == "boat") {
                 entity.localMatrix = utils.multiplyMatrices(utils.MakeRotateYMatrix(dt), entity.localMatrix);
             }
         });
+
+        lastUpdateTime = currentTime;
+
+        // var currentTime = (new Date).getTime();
+        // if (lastUpdateTime) {
+        //     var deltaC = (30 * (currentTime - lastUpdateTime)) / 1000.0;
+        //     cubeRx += deltaC;
+        //     cubeRy -= deltaC;
+        //     cubeRz += deltaC;
+        // }
+        // cubeWorldMatrix[3] = utils.MakeWorldNonUnif(0.0, 0.0, 0.0, cubeRx, cubeRy, cubeRz, 1.0, 2.0, 1.0);
+        // lastUpdateTime = currentTime;
     }
 
     function cameraScene() {
