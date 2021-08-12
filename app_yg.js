@@ -30,11 +30,7 @@ var main = function () {
     var lightPos = [20.0, 3.0, 0.0, 1.0];
     var lightTarget = 10;
     var lightDecay = 0;
-    //END
 
-    //tl.loadTextures();
-    
-    //requestAnimationFrame(cameraScene);
     cameraScene();
 
     function cameraScene() {
@@ -80,7 +76,7 @@ var main = function () {
             // gl.uniform3fv(materialDiffColorHandle, materialColor);
             // gl.uniform3fv(lightColorHandle, directionalLightColor);
 
-            
+
             gl.activeTexture(gl.TEXTURE0);
             gl.bindTexture(gl.TEXTURE_2D, entity.drawInfo.textureRef[0]);
             gl.uniform1i(entity.drawInfo.textLocation, 0);
@@ -115,15 +111,11 @@ var init = async function () {
         console.log("fs: " + fragmentShader);
         program = utils.createProgram(gl, vertexShader, fragmentShader);
     });
-        
-    await nodes.loadSceneAssets();
-    // var boatStr = await utils.get_objstr(baseDir + "assets/boat/boat.obj");
-    // boatModel = new OBJ.Mesh(boatStr);
-    // assets["boat"] = boatModel;
 
+    await nodes.loadSceneAssets();
     gl.useProgram(program);
 
-    await nodes.sceneGraph();
+    await nodes.buildSceneGraph();
     main();
 }
 
