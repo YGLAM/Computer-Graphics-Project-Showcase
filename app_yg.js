@@ -128,17 +128,17 @@ var init = async function () {
         return;
     }
 
+    // await utils.loadFiles([shaderDir + '/vertices/vs.glsl', shaderDir + 'fragments/fs_boat.glsl'],
+    // function (shaderText) {
+    //     var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
+    //     console.log("vs: " + vertexShader);
+    //     var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
+    //     console.log("fs: " + fragmentShader);
+    //     program = utils.createProgram(gl, vertexShader, fragmentShader);
+    // });
 
-    await utils.loadFiles([shaderDir + '/vertices/vs.glsl', shaderDir + 'fragments/fs_boat.glsl'],
-    function (shaderText) {
-        var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
-        console.log("vs: " + vertexShader);
-        var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
-        console.log("fs: " + fragmentShader);
-        program = utils.createProgram(gl, vertexShader, fragmentShader);
-    });
     await nodes.loadSceneAssets();
-    gl.useProgram(program);
+    // gl.useProgram(program);
 
     jp.parseLights();
     await nodes.buildSceneGraph();
