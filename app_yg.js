@@ -60,8 +60,6 @@ var main = function () {
     }
 
     function cameraScene() {
-        //Placeholder light parameters -- START
-
         aspect = gl.canvas.width / gl.canvas.height;
         perspectiveMatrix = utils.MakePerspective(60, aspect, 0.1, 100.0);
         viewMatrix = utils.MakeView(0.0, 20.0, 35.0, -20.0, 0.0);
@@ -74,8 +72,6 @@ var main = function () {
         gl.enable(gl.CULL_FACE);
 
         animate();
-
-        //console.log("roomPositionNode:"+ roomPositionNode);
         roomPositionNode.updateWorldMatrix();
 
         entities.forEach(function (entity) {
@@ -131,7 +127,9 @@ var init = async function () {
         document.write("GL context not opened");
         return;
     }
-    await utils.loadFiles([shaderDir + '/vertices/vs.glsl', shaderDir + 'fragments/fs.glsl'],
+
+
+    await utils.loadFiles([shaderDir + '/vertices/vs.glsl', shaderDir + 'fragments/fs_boat.glsl'],
     function (shaderText) {
         var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
         console.log("vs: " + vertexShader);
@@ -139,10 +137,10 @@ var init = async function () {
         console.log("fs: " + fragmentShader);
         program = utils.createProgram(gl, vertexShader, fragmentShader);
     });
-
     await nodes.loadSceneAssets();
     gl.useProgram(program);
 
+    jp.parseLights();
     await nodes.buildSceneGraph();
     main();
 }

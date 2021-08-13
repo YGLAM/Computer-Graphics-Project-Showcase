@@ -1,0 +1,229 @@
+[
+    {
+        "boatId":               "0",
+        "lightType":          "spot",
+
+        "directColor":        [1.0, 1.0, 1.0],
+        "directTheta":        111,
+        "directPhi":          39,
+
+        "pointColor":         [1.0, 1.0, 1.0],
+        "pointPosX":          0.0,
+        "pointPosY":          0.0,
+        "pointPosZ":          0.0,
+        "pointDecay":         0.0,
+        "pointTargetG":       20.0,
+
+        "spotColor":          [1.0, 1.0, 1.0],
+        "spotPosY":           10.0,
+        "spotDecay":          0.0,
+        "spotTargetG":        20.0,
+        "spotTheta":          30,
+        "spotPhi":            -30,
+        "spotConeIn":         30,
+        "spotConeOut":        30,
+
+        "lightAmbient":       "ambient",
+
+        "ambientColor":       [0.24313725490196078, 0.24313725490196078, 0.24313725490196078],
+        "ambientLowerColor":  [0.0, 0.0, 0.0],
+        "ambientUpperColor":  [0.0, 0.0, 0.0],
+
+        "hemisphericTheta":   0,
+        "hemisphericPhi":     0,
+
+        "lightDiffuse":       "lambert",
+
+        "lambertColor":       [ 0.7529411764705882, 0.7529411764705882, 0.7529411764705882],
+        "lambertTexture":     66,
+
+        "toonColor":          [0.0, 0.0, 0.0],
+        "toonTexture":        0,
+        "toonThr":            0,
+
+        "lightSpecular":      "blinn",
+
+        "phongColor":         [0.0, 0.0, 0.0],
+        "phongShiny":         1,
+
+        "blinnColor":         [1, 0.5019607843137255, 0.7529411764705882],
+        "blinnShiny":         82.0,
+
+        "toonPColor":         [0.5019607843137255, 0, 1],
+        "toonPThr":           0,
+
+        "toonBColor":         [0.5019607843137255, 0, 1],
+        "toonBThr":           0
+    },
+
+    {
+        "boatId":               "1",
+        "lightType":          "point",
+
+        "directColor":        [1.0, 1.0, 1.0],
+        "directTheta":        60,
+        "directPhi":          60,
+
+        "pointColor":         [1.0, 1.0, 1.0],
+        "pointPosX":          32.0,
+        "pointPosY":          -2.0,
+        "pointPosZ":          1.0,
+        "pointDecay":         1.0,
+        "pointTargetG":       43.0,
+
+        "spotColor":          [1.0, 1.0, 1.0],
+        "spotPosY":           10.0,
+        "spotDecay":          0.0,
+        "spotTargetG":        20.0,
+        "spotTheta":          30,
+        "spotPhi":            -30,
+        "spotConeIn":         30,
+        "spotConeOut":        30,
+
+        "lightAmbient":       "none",
+
+        "ambientColor":       [0.0, 0.0, 0.0],
+        "ambientLowerColor":  [0.0, 0.0, 0.0],
+        "ambientUpperColor":  [0.0, 0.0, 0.0],
+
+        "hemisphericTheta":   60,
+        "hemisphericPhi":     60,
+
+        "lightDiffuse":       "lambert",
+
+        "lambertColor":       [1, 1, 0.5019607843137255],
+        "lambertTexture":     91,
+
+        "toonColor":          [0.0, 0.0, 0.0],
+        "toonTexture":        0,
+        "toonThr":            0,
+
+        "lightSpecular":      "phong",
+
+        "phongColor":         [0.0, 1.0, 0.0],
+        "phongShiny":         6,
+
+        "blinnColor":         [0.0, 0.0, 0.0],
+        "blinnShiny":         1,
+
+        "toonPColor":         [0.0, 0.0, 0.0],
+        "toonPThr":           0,
+
+        "toonBColor":         [0.0, 0.0, 0.0],
+        "toonBThr":           0
+    },
+
+    {
+        "boatId":               "2",
+        "lightType":          "spot",
+
+        "directColor":        [1, 0.5019607843137255, 1],
+        "directTheta":        93,
+        "directPhi":          -51,
+
+        "pointColor":         [1.0, 1.0, 1.0],
+        "pointPosX":          0.0,
+        "pointPosY":          0.0,
+        "pointPosZ":          0.0,
+        "pointDecay":         1.0,
+        "pointTargetG":       20.0,
+
+        "spotColor":          [1, 0.5019607843137255, 0.7529411764705882],
+        "spotPosY":           10.0,
+        "spotDecay":          2.0,
+        "spotTargetG":        100.0,
+        "spotTheta":          30,
+        "spotPhi":            -30,
+        "spotConeIn":         100,
+        "spotConeOut":        150,
+
+        "lightAmbient":       "none",
+
+        "ambientColor":       [0.0, 0.0, 0.0],
+        "ambientLowerColor":  [0.0, 0.0, 0.0],
+        "ambientUpperColor":  [0.0, 0.0, 0.0],
+
+        "hemisphericTheta":   60,
+        "hemisphericPhi":     60,
+
+        "lightDiffuse":       "lambert",
+
+        "lambertColor":       [0.13725490196078433, 0.13725490196078433, 0.13725490196078433],
+        "lambertTexture":     6,
+
+        "toonColor":          [0.0, 0.0, 0.0],
+        "toonTexture":        0,
+        "toonThr":            0,
+
+        "lightSpecular":      "blinn",
+
+        "phongColor":         [0.0, 0.0, 0.0],
+        "phongShiny":         1,
+
+        "blinnColor":         [1, 0.38823529411764707, 0.09019607843137255],
+        "blinnShiny":         26,
+
+        "toonPColor":         [0.0, 0.0, 0.0],
+        "toonPThr":           0,
+
+        "toonBColor":         [0.0, 0.0, 0.0],
+        "toonBThr":           0
+    },
+
+    {
+        "boatId":               "3",
+        "lightType":          "direct",
+
+        "directColor":        [1, 0.5019607843137255, 1],
+        "directTheta":        93,
+        "directPhi":          72,
+
+        "pointColor":         [1.0, 1.0, 1.0],
+        "pointPosX":          0.0,
+        "pointPosY":          0.0,
+        "pointPosZ":          0.0,
+        "pointDecay":         1.0,
+        "pointTargetG":       20.0,
+
+        "spotColor":          [1.0, 1.0, 1.0],
+        "spotPosY":           10.0,
+        "spotDecay":          0.0,
+        "spotTargetG":        20.0,
+        "spotTheta":          30,
+        "spotPhi":            -30,
+        "spotConeIn":         30,
+        "spotConeOut":        30,
+
+        "lightAmbient":       "hemispheric",
+
+        "ambientColor":       [0.0, 0.0, 0.0],
+        "ambientLowerColor":  [0, 0.5019607843137255, 1],
+        "ambientUpperColor":  [0.5019607843137255, 1, 0.5019607843137255],
+
+        "hemisphericTheta":   57,
+        "hemisphericPhi":     -51,
+
+        "lightDiffuse":       "none",
+
+        "lambertColor":       [0.0, 0.0, 0.0],
+        "lambertTexture":     100,
+
+        "toonColor":          [0.0, 0.0, 0.0],
+        "toonTexture":        0,
+        "toonThr":            0,
+
+        "lightSpecular":      "blinn",
+
+        "phongColor":         [0.0, 0.0, 0.0],
+        "phongShiny":         1,
+
+        "blinnColor":         [1, 0.5019607843137255, 0.25098039215686274],
+        "blinnShiny":         48,
+
+        "toonPColor":         [0.0, 0.0, 0.0],
+        "toonPThr":           181,
+
+        "toonBColor":         [0.0, 0.0, 0.0],
+        "toonBThr":           0
+    }
+]
