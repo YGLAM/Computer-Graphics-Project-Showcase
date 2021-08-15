@@ -32,6 +32,12 @@ var main = function () {
     var lightDecay = 0;
 
     var lastUpdateTime = (new Date).getTime();
+
+    var zoom = false;
+    var keys = [];
+    viewMatrix = utils.MakeView(0.0, 20.0, 35.0, -20.0, 0.0);
+    window.addEventListener("keyup", keyFunction, false);
+
     cameraScene();
 
     function animate() {
@@ -62,7 +68,6 @@ var main = function () {
     function cameraScene() {
         aspect = gl.canvas.width / gl.canvas.height;
         perspectiveMatrix = utils.MakePerspective(60, aspect, 0.1, 100.0);
-        viewMatrix = utils.MakeView(0.0, 20.0, 35.0, -20.0, 0.0);
 
         utils.resizeCanvasToDisplaySize(gl.canvas);
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
@@ -112,6 +117,41 @@ var main = function () {
         window.requestAnimationFrame(cameraScene);
     }
     //window.requestAnimationFrame(cameraScene);
+
+    function keyFunction(e) {
+        // If the view is not zoomed on a boat, I can zoom on a boat 
+        if (!zoom) {
+            // Set viewMatrix to zoom on a certain boat and set zoom to true
+            switch(e.keyCode) {
+                case 49:    // 1
+                    viewMatrix = utils.MakeView(0.0, 30.0, 35.0, -20.0, 0.0);
+                    zoom = true;
+                    break;
+                case 50:    // 2
+                    viewMatrix = utils.MakeView(0.0, 40.0, 35.0, -20.0, 0.0);
+                    zoom = true;
+                    break;
+                case 51:    // 3
+                    viewMatrix = utils.MakeView(0.0, 50.0, 35.0, -20.0, 0.0);
+                    zoom = true;
+                    break;
+            }
+        }
+
+        // If the view is on a boat, I can only press "esc" to reset it
+        else /*if (zoom)*/ { 
+            // Reset viewMatrix, set zoom to false and empty keys array
+            switch(e.keyCode) {
+                case 27:    // Escape
+                    viewMatrix = utils.MakeView(0.0, 20.0, 35.0, -20.0, 0.0);
+                    zoom = false;
+                    keys = [];
+                    break; 
+            }
+        }
+
+        window.requestAnimationFrame(cameraScene);
+    }
 }
 
 var init = async function () {
