@@ -18,15 +18,6 @@ var main = function () {
         //object = retrieveAsset(entity.drawInfo.name);
         lights.lightLocations(entity);
     });
-    // var materialDiffColorHandle = gl.getUniformLocation(program, 'mDiffColor');
-    // var lightColorHandle = gl.getUniformLocation(program, 'lightColor');
-
-    // var lightDirectionHandle = gl.getUniformLocation(program, 'lightDirection');
-
-    // var lightPosHandle = gl.getUniformLocation(program, "lightPos");
-    // var lightTargetHandle = gl.getUniformLocation(program, "lightTarget");
-    // var lightDecayHandle = gl.getUniformLocation(program, "lightDecay");
-
     var lightPos = [20.0, 3.0, 0.0, 1.0];
     var lightTarget = 10;
     var lightDecay = 0;
@@ -47,18 +38,7 @@ var main = function () {
         });
 
         lastUpdateTime = currentTime;
-
-        // var currentTime = (new Date).getTime();
-        // if (lastUpdateTime) {
-        //     var deltaC = (30 * (currentTime - lastUpdateTime)) / 1000.0;
-        //     cubeRx += deltaC;
-        //     cubeRy -= deltaC;
-        //     cubeRz += deltaC;
-        // }
-        // cubeWorldMatrix[3] = utils.MakeWorldNonUnif(0.0, 0.0, 0.0, cubeRx, cubeRy, cubeRz, 1.0, 2.0, 1.0);
-        // lastUpdateTime = currentTime;
-    }
-
+      }
     function cameraScene() {
         aspect = gl.canvas.width / gl.canvas.height;
         perspectiveMatrix = utils.MakePerspective(60, aspect, 0.1, 100.0);
@@ -86,20 +66,7 @@ var main = function () {
             normalMatrix = utils.invertMatrix(utils.transposeMatrix(viewWorldMatrix));
             gl.uniformMatrix4fv(entity.drawInfo.normalMatrixPositionHandle, gl.FALSE, utils.transposeMatrix(normalMatrix));
 
-
-            //object = retrieveAsset(entity.drawInfo.name);
             lights.setLightValues(entity);
-            // var dirLightTransformed = utils.multiplyMatrix3Vector3(utils.sub3x3from4x4(viewMatrix), directionalLight);
-            // gl.uniform3fv(lightDirectionHandle, dirLightTransformed);
-
-            // var lightPosTransformed = utils.multiplyMatrixVector(viewMatrix, lightPos);
-            // gl.uniform3fv(lightPosHandle, lightPosTransformed.slice(0, 3));
-            // gl.uniform1f(lightTargetHandle, lightTarget);
-            // gl.uniform1f(lightDecayHandle, lightDecay);
-
-            // gl.uniform3fv(materialDiffColorHandle, materialColor);
-            // gl.uniform3fv(lightColorHandle, directionalLightColor);
-
 
             gl.activeTexture(gl.TEXTURE0);
             gl.bindTexture(gl.TEXTURE_2D, entity.drawInfo.textureRef[0]);
@@ -111,7 +78,6 @@ var main = function () {
 
         window.requestAnimationFrame(cameraScene);
     }
-    //window.requestAnimationFrame(cameraScene);
 }
 
 var init = async function () {
@@ -127,16 +93,7 @@ var init = async function () {
         document.write("GL context not opened");
         return;
     }
-
-    // await utils.loadFiles([shaderDir + '/vertices/vs.glsl', shaderDir + 'fragments/fs_boat.glsl'],
-    // function (shaderText) {
-    //     var vertexShader = utils.createShader(gl, gl.VERTEX_SHADER, shaderText[0]);
-    //     console.log("vs: " + vertexShader);
-    //     var fragmentShader = utils.createShader(gl, gl.FRAGMENT_SHADER, shaderText[1]);
-    //     console.log("fs: " + fragmentShader);
-    //     program = utils.createProgram(gl, vertexShader, fragmentShader);
-    // });
-
+//program creation was once here
     await nodes.loadSceneAssets();
     // gl.useProgram(program);
 
