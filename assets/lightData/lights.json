@@ -61,7 +61,7 @@
     },
     {
         "boatId":               "1",
-        "lightType":          "point",
+        "lightType":          "direct",
 
         "directColor":        [1.0, 0.0, 0.0],
         "directTheta":        120,

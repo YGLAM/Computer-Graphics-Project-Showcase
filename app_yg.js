@@ -41,6 +41,7 @@ var init = async function () {
     // gl.useProgram(program);
 
     jp.parseLights();
+    activeID = 1;
     updateGUI();
     await nodes.buildSceneGraph();
     main();
