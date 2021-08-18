@@ -7,7 +7,6 @@ var main = function () {
     entities.forEach(function (entity) {
         console.log(entity);
         gl.useProgram(entity.drawInfo.programInfo);
-        //object = retrieveAsset(entity.drawInfo.name);
         lights.lightLocations(entity);
     });
 
@@ -42,6 +41,7 @@ var init = async function () {
     // gl.useProgram(program);
 
     jp.parseLights();
+    updateGUI();
     await nodes.buildSceneGraph();
     main();
 }

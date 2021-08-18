@@ -18,10 +18,11 @@
     <script src="app_yg.js"></script>
     <!-- Loading libraries.. -->
     <script src="lib/utils.js"></script>
-    <script type="lib/vars.js"></script>
+    <!--<script src="lib/vars.js"></script>-->
     <script type="text/javascript" src="lib/webgl-obj-loader.min.js"></script>
     <!--interaction -->
     <script src="lib/interaction/gui.js"></script>
+    <script src="lib/interaction/listener.js"></script>
     <script src="lib/interaction/raycast.js"></script>
     <!--json-->
     <script src="lib/json/parser.js"></script>
@@ -55,12 +56,12 @@
                     </tr>
                     <tr>
                         <div style="text-align:center">
-                            <label for="boats">Boat:</label>
-                            <select id="lightBoat" name="boats" onchange="changeActiveBoat(this.value);">
-                                <option value="boatOne">Boat 1</option>
-                                <option value="boatTwo">Boat 2</option>
-                                <option value="boatThree">Boat 3</option>
-                                <option value="boatFour">Boat 4</option>
+                            <label for="boats">Models:</label>
+                            <select id="lightBoat" name="boats" onchange="changeActiveModel(this.value);">
+                                <option value="1">Boat 1</option>
+                                <option value="2">Boat 2</option>
+                                <option value="3">Boat 3</option>
+                                <option value="4">Boat 4</option>
                             </select>
                         </div>
                     </tr>
@@ -69,7 +70,7 @@
                         <div style="text-align:center">
                             <label for="light-type">Lights:</label>
                             <select id="lightSelection" name="light-type"
-                                onchange="changeLightGeneralSelection(this.value); changeDropdown(this.value);">
+                                onchange="changeSelection(generalSelection,this.value,'',0);">
                                 <option value="type">Light model</option>
                                 <option value="ambient">Ambient light</option>
                                 <option value="diffuse">Diffuse reflection</option>
@@ -83,7 +84,7 @@
                     <div id="type" style="display: block;">
                         <div style="text-align:center">
                             <label for="l-type">Type</label>
-                            <select id="lightType" name="l-type" onchange="changeLightType(this.value);">
+                            <select id="lightType" name="l-type" onchange="console.log('here typeSelection is  '+typeSelection);changeSelection(typeSelection,this.value,'lightType',4);">
                                 <option value="typedirect">Direct</option>
                                 <option value="typepoint">Point</option>
                                 <option value="typespot">Spot</option>
@@ -143,9 +144,9 @@
 
                             <br>
 
-                            <input type="range" min="0" max="100" name="pointTargetG" id="pointTargetG"
-                                onchange="setSlider(this.value, 'pointTargetG')">
-                            <label for="pointTargetG"> Target dis. g</label>
+                            <input type="range" min="0" max="100" name="pointTarget" id="pointTarget"
+                                onchange="setSlider(this.value, 'pointTarget')">
+                            <label for="pointTarget"> Target distance</label>
                         </div>
 
                         <!-- Display if Type -> Spot is selected-->
@@ -168,17 +169,17 @@
 
                             <br>
 
-                            <input type="range" min="1" max="100" name="spotTargetG" id="spotTargetG"
-                                onchange="setSlider(this.value, 'spotTargetG')">
-                            <label for="spotTargetG"> Target dis. g</label>
+                            <input type="range" min="1" max="100" name="spotTarget" id="spotTarget"
+                                onchange="setSlider(this.value, 'spotTarget')">
+                            <label for="spotTarget"> Target distance</label>
 
                             <!-- No need to edit them.
                   <input type="range" min="0" max="360" name="spotTheta" id="spotTheta"
                   onchange="setSlider(this.value, 'spotTheta')">
                   <label for="spotTheta"> Dir &theta;</label>
-  
+
                   <br>
-  
+
                   <input type="range" min="0" max="360" name="spotPhi" id="spotPhi"
                   onchange="setSlider(this.value, 'spotPhi')">
                   <label for="spotPhi"> Dir &phi;</label>
@@ -208,7 +209,7 @@
                     <div id="ambient" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-ambient">Type</label>
-                            <select id="lightAmbient" name="l-ambient" onchange="changeLightAmbient(this.value);">
+                            <select id="lightAmbient" name="l-ambient" onchange="changeSelection(ambientSelection,this.value,'lightAmbient',7);">
                                 <option value="ambientambient">Ambient</option>
                                 <option value="ambienthemispheric">Hemispheric</option>
                                 <option value="ambientnone">None</option>
@@ -259,9 +260,10 @@
                     <div id="diffuse" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-diffuse">Type</label>
-                            <select id="lightDiffuse" name="l-diffuse" onchange="changeLightDiffuse(this.value);">
+                            <select id="lightDiffuse" name="l-diffuse" onchange="changeSelection(diffuseSelection,this.value,'lightDiffuse',7);">
                                 <option value="diffuselambert">Lambert</option>
                                 <option value="diffusetoon">Toon</option>
+                                <option value="diffuseoren">Oren-Nayar</option>
                                 <option value="diffusenone">None</option>
                             </select>
                         </div>
@@ -298,7 +300,20 @@
                                 onchange="setSlider(this.value, 'toonThr')">
                             <label for="toonThr" style="display: none;"> Toon thr.</label>
                         </div>
+                        <div id="diffuseoren" style="display: block;">
+                            <input type="color" id="orenColor" name="orenColor" value="#000000"
+                                onchange="setColor(this.value, 'orenColor')">
+                            <label for="orenColor">Color</label>
 
+                            <br>
+
+                            <input type="range" min="0" max="100" name="orenTexture" id="orenTexture"
+                                onchange="setSlider(this.value, 'orenTexture')">
+                            <label for="orenTexture"> Texture</label>
+                            <input type="range" min="0" max="100" name="orenRoughness" id="orenRoughness"
+                                onchange="setSlider(this.value,'orenRoughness')">
+                            <label for="orenRoughness"> Roughness</label>
+                        </div>
                         <!-- Display if Diffuse -> None is selected-->
                         <div id="diffusenone" style="display: none;">
                             <!-- Nothing to display-->
@@ -309,7 +324,7 @@
                     <div id="specular" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-specular">Type</label>
-                            <select id="lightSpecular" name="l-specular" onchange="changeLightSpecular(this.value);">
+                            <select id="lightSpecular" name="l-specular" onchange="changeSelection(specularSelection,this.value,'lightSpecular',8);">
                                 <option value="specularphong">Phong</option>
                                 <option value="specularblinn">Blinn</option>
                                 <option value="speculartoonPhong">Toon (Phong)</option>
@@ -377,10 +392,10 @@
                             <!-- Nothing to display-->
                         </div>
                     </div>
-                    <tr>
+                    <!--<tr>
                         <br>
                         <p>Export light settings:</p>
-                        <!-- Download lights button-->
+                        <!-- Download lights button
                         <button id="saveLights" onclick="DownloadLights()">Export lights</button>
                     </tr>
                     <tr>
@@ -388,7 +403,7 @@
                         <p>Load lights settings</p>
                         <input type="file" id="fileinput" accept="application/JSON">
                         <input type="button" id="btnLoad" value="Submit" onclick="loadFile();">
-                    </tr>
+                    </tr>-->
                 </table>
             </div>
     </table>
