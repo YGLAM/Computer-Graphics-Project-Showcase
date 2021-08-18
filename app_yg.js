@@ -13,7 +13,7 @@ var main = function () {
     lastUpdateTime = (new Date).getTime();
 
     window.addEventListener("keyup", keyFunction, false);
-    window.addEventListener("mouseup", myOnMouseUp, false);
+    canvas.addEventListener("mouseup", myOnMouseUp, false);
 
     cameraScene();
   //here was animate()
