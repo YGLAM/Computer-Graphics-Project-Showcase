@@ -137,7 +137,7 @@ vec4 computeDiffuse(vec3 lightDirection, vec4 lightColor, vec3 nVec, vec4 diffLC
 }
 
 // Compute ambient light
-vec4 computeAmbient(vec4 ambColor, vec3 normalVec, float type, vec3 lightDir) {
+vec4 computeAmbient(vec4 ambColor, vec3 normalVec, float type) {
   if (type == 0.0) {
     // Ambient
     return ambColor * ambientColor;
@@ -145,7 +145,10 @@ vec4 computeAmbient(vec4 ambColor, vec3 normalVec, float type, vec3 lightDir) {
     // Hemispheric
     float blend = (dot(normalVec, hemisphericDir) +1.0) / 2.0;
     return (ambientUpperColor * blend + ambientLowerColor * (1.0 - blend)) * ambColor;
-  } 
+  } else {
+    // None
+    return vec4(0.0, 0.0, 0.0, 1.0);
+  }
 }
 
 // Compute specular light
@@ -193,7 +196,7 @@ void main() {
 
  vec4 diffuse = computeDiffuse(lightDir, lightCol, nNormal, diffLColor, diffTColor,diffONColor, nEyeDirection, lightDiffuseType);
 
- vec4 ambient = computeAmbient(ambientMatColor, nNormal, lightAmbientType, lightDir);
+ vec4 ambient = computeAmbient(ambientMatColor, nNormal, lightAmbientType);
 
  vec4 specular = computeSpecular(lightDir, lightCol, nNormal, nEyeDirection, lightSpecularType);
 

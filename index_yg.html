@@ -209,7 +209,7 @@
                     <div id="ambient" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-ambient">Type</label>
-                            <select id="lightAmbient" name="l-ambient" onchange="changeSelection(ambientSelection,this.value,'lightAmbient',7);">
+                            <select id="lightAmbient" name="l-ambient" onchange="changeSelection(ambientSelection,this.value,'lightAmbientType',7);">
                                 <option value="ambientambient">Ambient</option>
                                 <option value="ambienthemispheric">Hemispheric</option>
                                 <option value="ambientnone">None</option>
@@ -260,7 +260,7 @@
                     <div id="diffuse" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-diffuse">Type</label>
-                            <select id="lightDiffuse" name="l-diffuse" onchange="changeSelection(diffuseSelection,this.value,'lightDiffuse',7);">
+                            <select id="lightDiffuse" name="l-diffuse" onchange="changeSelection(diffuseSelection,this.value,'lightDiffuseType',7);">
                                 <option value="diffuselambert">Lambert</option>
                                 <option value="diffusetoon">Toon</option>
                                 <option value="diffuseoren">Oren-Nayar</option>
@@ -324,7 +324,7 @@
                     <div id="specular" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-specular">Type</label>
-                            <select id="lightSpecular" name="l-specular" onchange="changeSelection(specularSelection,this.value,'lightSpecular',8);">
+                            <select id="lightSpecular" name="l-specular" onchange="changeSelection(specularSelection,this.value,'lightSpecularType',8);">
                                 <option value="specularphong">Phong</option>
                                 <option value="specularblinn">Blinn</option>
                                 <option value="speculartoonPhong">Toon (Phong)</option>
