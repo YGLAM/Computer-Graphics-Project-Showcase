@@ -69,7 +69,7 @@
 
         "pointColor":         [0.0, 1.0, 0.0],
         "pointPosX":          0.0,
-        "pointPosY":          30.0,
+        "pointPosY":          20.0,
         "pointPosZ":          0.0,
         "pointDecay":         1.0,
         "pointTarget":       20.0,

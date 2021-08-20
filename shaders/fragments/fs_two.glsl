@@ -76,6 +76,7 @@ uniform vec4 toonBColor;
 uniform float toonBThr;
 
 // Compute light direction
+//computeLightDir(finalSpotPosition, pointPos, dirDirection, lightType);
 vec3 computeLightDir(vec3 sPos, vec3 pPos, vec3 Dir, float lType) {
   if (lType == 0.0) {
     // Direct
@@ -92,6 +93,7 @@ vec3 computeLightDir(vec3 sPos, vec3 pPos, vec3 Dir, float lType) {
 }
 
 // Compute light color
+//computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPos, spotDecay, finalSpotPosition, spotConeIn/100.0, spotConeOut, lightDir, lightType);
 vec4 computeLightColor(vec4 dColor, vec4 sColor, vec4 pColor, float pDecay, vec3 pPos, float sDecay, vec3 spotPosition, float sConeIn, float sConeOut, vec3 dir, float lType) {
   if (lType == 0.0) {
     // Direct
@@ -110,22 +112,23 @@ vec4 computeLightColor(vec4 dColor, vec4 sColor, vec4 pColor, float pDecay, vec3
 }
 
 // Compute diffuse light
+//computeDiffuse(lightDir, lightCol (from previous), nNormal, diffLColor, diffTColor,diffONColor, nEyeDirection, lightDiffuseType);
 vec4 computeDiffuse(vec3 lightDirection, vec4 lightColor, vec3 nVec, vec4 diffLColor, vec4 diffTColor,vec4 diffONColor, vec3 eyeVec, float lightDiffuseType) {
-  float dotN = clamp(dot(nVec, lightDirection), 0.0, 1.0);
+  float dotN = max(0.0,dot(nVec, lightDirection));
   if(lightDiffuseType == 0.0) {//Lambert
     vec4 col = lightColor * diffLColor;
-    return dotN * col;
+    return  col * dotN;
   }else if(lightDiffuseType == 1.0){//Toon
     vec4 col = lightColor * diffTColor;
     return max(sign(dotN- toonThr), 0.0) * col;
   }else if(lightDiffuseType == 2.0){//Oren Nayar
-    vec4 col = dotN * lightColor * diffONColor;
-    float VdotN = max(0.0, dot(nVec, eyeVec));//this needs to be modified
+    vec4 col = lightColor * diffONColor * dotN;
+    float VdotN = max(0.0, dot(nVec, eyeVec));
     float theta_i = acos(dotN);
     float theta_r = acos(VdotN);
     float alpha = max(theta_i,theta_r);
-    float beta = min(theta_i,theta_r);
-    float sigmaTwo = orenRoughness * orenRoughness;// *2.46;
+    float beta = min(min(theta_i,theta_r),1.57);
+    float sigmaTwo = orenRoughness * orenRoughness *2.46;
     float a = 1.0 -0.5*sigmaTwo/ (sigmaTwo + 0.33);
     float b = 0.45 * sigmaTwo/ (sigmaTwo + 0.09);
     vec3 v_i = normalize(lightDirection - nVec * dotN);
@@ -153,11 +156,11 @@ vec4 computeAmbient(vec4 ambColor, vec3 normalVec, float type) {
 
 // Compute specular light
 vec4 computeSpecular(vec3 lightDir, vec4 lightCol, vec3 normalVec, vec3 eyeDir, float type) {
-  float dotN = clamp(dot(normalVec, lightDir), 0.0, 1.1);
+  float dotN = max(0.0,dot(normalVec, lightDir));
   vec3 ref = -reflect(lightDir, normalVec);
-  float dotR = clamp(dot(ref, eyeDir), 0.0, 1.0);
+  float dotR = max(dot(ref, eyeDir),0.0);
   vec3 halfVec = (normalize(lightDir + eyeDir));
-  float hDotN = clamp(dot(normalVec, halfVec), 0.0, 1.0);
+  float hDotN = max(dot(normalVec, halfVec), 0.0);
   if (type == 0.0) {
     // Phong
     return lightCol * phongColor * max(sign(dotN), 0.0) * pow(dotR, phongShiny);
@@ -181,8 +184,10 @@ void main() {
  // Initial Spot position for boat 3
  vec3 spotPosition = vec3(0, 10, 0);
  vec3 finalSpotPosition = spotPosition + vec3(0.0, spotPosY*1.5, 0.0);
+
  vec3 eyePosition = vec3(0.0,0.0,0.0);
  vec3 nEyeDirection = normalize(eyePosition - fs_position);
+
  vec3 nNormal = normalize(fs_normal);
  vec4 textureColor = texture(u_texture, fs_uv);
 

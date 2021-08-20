@@ -45,24 +45,24 @@
                 Your browser does not support HTML5
             </canvas>
         </td>
-        <td style="background-color: white; font-family: courier; padding: 5px;">
+        <td id="mainMenu" style="display:none;background-color: white; font-family: courier; padding: 5px;">
             <div
-                style="position: absolute; z-index: 1; right: 1em; top: 2em; width:325px; height:54%; background-color: white; border-style: solid; border-color: yellow; opacity: 0.5; padding: 5px 10px 5px 10px; overflow:auto; text-align:center">
+                style="position: absolute;
+                 z-index: 1;
+                 right: 1em; top: 2em;
+                 width:325px; height:50%;
+                 background-color: white; border-style: solid; border-color: yellow; opacity: 0.5; padding: 5px 10px 5px 10px; overflow:auto; text-align:center">
                 <table>
                     <tr>
                         <p>
-                        <h2>Lights customization</h2>
+                        <h2>Light Configuration</h2>
                         </p>
                     </tr>
                     <tr>
-                        <div style="text-align:center">
-                            <label for="boats">Models:</label>
-                            <select id="lightBoat" name="boats" onchange="changeActiveModel(this.value);">
-                                <option value="1">Boat 1</option>
-                                <option value="2">Boat 2</option>
-                                <option value="3">Boat 3</option>
-                                <option value="4">Boat 4</option>
-                            </select>
+                        <div style="text-align:left" >
+                          <p><h3> Current Model:</h3>
+                          <div style="text-align:left" id ="currentModel">
+                          </p></div>
                         </div>
                     </tr>
                     <br>
@@ -84,7 +84,7 @@
                     <div id="type" style="display: block;">
                         <div style="text-align:center">
                             <label for="l-type">Type</label>
-                            <select id="lightType" name="l-type" onchange="console.log('here typeSelection is  '+typeSelection);changeSelection(typeSelection,this.value,'lightType',4);">
+                            <select id="lightType" name="l-type" onchange="changeSelection(typeSelection,this.value,'lightType',4);">
                                 <option value="typedirect">Direct</option>
                                 <option value="typepoint">Point</option>
                                 <option value="typespot">Spot</option>
@@ -120,13 +120,13 @@
 
                             <br>
 
-                            <input type="range" min="-200" max="200" name="pointPosX" id="pointPosX"
+                            <input type="range" min="-1000" max="1000" name="pointPosX" id="pointPosX"
                                 onchange="setSlider(this.value, 'pointPosX')">
                             <label for="pointPosX"> Pos X</label>
 
                             <br>
 
-                            <input type="range" min="-200" max="200" name="pointPosY" id="pointPosY"
+                            <input type="range" min="-1000" max="1000" name="pointPosY" id="pointPosY"
                                 onchange="setSlider(this.value, 'pointPosY')">
                             <label for="pointPosY"> Pos Y</label>
 
