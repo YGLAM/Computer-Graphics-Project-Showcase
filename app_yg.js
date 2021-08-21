@@ -43,6 +43,7 @@ var init = async function () {
     jp.parseLights();
     activeID = 1;
     updateGUI();
+    console.log("I've updated the GUI");
     await nodes.buildSceneGraph();
     main();
 }

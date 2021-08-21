@@ -27,13 +27,14 @@ uniform vec3 dirDirection;
 
 // Point
 uniform vec4 pointColor;
-uniform vec3 pointPos;
+uniform vec3 pointPosition;
 uniform float pointDecay;
 uniform float pointTarget;
 
 // Spot
 uniform vec4 spotColor;
-uniform float spotPosY;
+uniform vec3 spotPosition;
+//uniform float spotPosY;
 uniform float spotDecay;
 uniform float spotTarget;
 uniform vec3 spotDir;
@@ -76,36 +77,38 @@ uniform vec4 toonBColor;
 uniform float toonBThr;
 
 // Compute light direction
-//computeLightDir(finalSpotPosition, pointPos, dirDirection, lightType);
-vec3 computeLightDir(vec3 sPos, vec3 pPos, vec3 Dir, float lType) {
+//computeLightDir(finalSpotPosition, pointPosition, dirDirection, lightType);
+vec3 computeLightDir(vec3 spot_position, vec3 point_position, vec3 Dir, float lType) {
   if (lType == 0.0) {
     // Direct
     return Dir;
   } else if (lType == 1.0) {
     // Point
-    return normalize(pPos - fs_position);
+    return normalize(point_position - fs_position);
   } else if (lType == 2.0) {
     // Spot
-    return normalize(sPos - fs_position);
+    return normalize(spot_position - fs_position);
   } else {
     return Dir;
   }
 }
 
 // Compute light color
-//computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPos, spotDecay, finalSpotPosition, spotConeIn/100.0, spotConeOut, lightDir, lightType);
-vec4 computeLightColor(vec4 dColor, vec4 sColor, vec4 pColor, float pDecay, vec3 pPos, float sDecay, vec3 spotPosition, float sConeIn, float sConeOut, vec3 dir, float lType) {
+//computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPosition, spotDecay, finalSpotPosition, spotConeIn/100.0, spotConeOut, lightDir, lightType);
+vec4 computeLightColor(vec4 dColor, vec4 spotColor, vec4 pointColor, float pDecay, vec3 pPos, float lDecay, vec3 spotPosition, float lConeIn, float lConeOut, vec3 dir, float lType) {
   if (lType == 0.0) {
     // Direct
     return dColor;
   } else if (lType == 1.0) {
     // Point
-    return pColor * pow(pointTarget / length(pPos - fs_position), pDecay);
+    return pointColor * pow(pointTarget / length(pPos - fs_position), pDecay);
   } else if (lType == 2.0) {
     // Spot
+    float LCosOut = cos(radians(lConeOut / 2.0));
+    float LCosIn = cos(radians(lConeOut * lConeIn / 2.0));
     vec3 spotLightDir = normalize(spotPosition - fs_position);
     float cosAngle = dot(spotLightDir, spotDir);
-    return sColor * pow(spotTarget/length(spotPosition - fs_position), sDecay) * clamp(((cosAngle - sConeOut) / (sConeIn - sConeOut)), 0.0, 1.0);
+    return spotColor * pow(spotTarget/length(spotPosition - fs_position), lDecay) * clamp(((cosAngle - LCosOut) / (LCosIn - LCosOut)), 0.0, 1.0);
     } else {
     return dColor * vec4(0.0, 0.0, 0.0, 1.0);
   }
@@ -178,12 +181,22 @@ vec4 computeSpecular(vec3 lightDir, vec4 lightCol, vec3 normalVec, vec3 eyeDir, 
     return vec4(0.0, 0.0, 0.0, 0.0);
   }
 }
-
+vec4 computeMatAmbColor(float lType,vec4 textureColor){
+  if(lType == 0.0) {//Lambert
+    return ambientColor * (1.0-lambertTexture) + textureColor * lambertTexture;
+  }else if(lType == 1.0){//Toon
+    return ambientColor * (1.0 - toonTexture) + textureColor * toonTexture;
+  }else if(lType == 2.0){//Oren Nayar
+    return ambientColor*(1.0-orenTexture)+ textureColor*orenTexture;
+  }else{
+    return ambientColor*0.0;
+  }
+}
 void main() {
 
- // Initial Spot position for boat 3
- vec3 spotPosition = vec3(0, 10, 0);
- vec3 finalSpotPosition = spotPosition + vec3(0.0, spotPosY*1.5, 0.0);
+
+// vec3 spotPosition = vec3(0, 10, 0);
+ //vec3 finalSpotPosition = spotPosition + vec3(0.0, spotPosY*1.5, 0.0);
 
  vec3 eyePosition = vec3(0.0,0.0,0.0);
  vec3 nEyeDirection = normalize(eyePosition - fs_position);
@@ -194,10 +207,10 @@ void main() {
  vec4 diffLColor = lambertColor * (1.0 - lambertTexture) + textureColor * (lambertTexture);//lambert
  vec4 diffTColor = toonColor * (1.0-toonTexture) + textureColor * toonTexture;//toon
  vec4 diffONColor = orenColor *(1.0-orenTexture) + textureColor * orenTexture;//oren nayar
- vec4 ambientMatColor = ambientColor * 0.2 + textureColor * 0.8;
+ vec4 ambientMatColor = computeMatAmbColor(lightDiffuseType, textureColor);
 
- vec3 lightDir = computeLightDir(finalSpotPosition, pointPos, dirDirection, lightType);
- vec4 lightCol = computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPos, spotDecay, finalSpotPosition, spotConeIn/100.0, spotConeOut, lightDir, lightType);
+ vec3 lightDir = computeLightDir(spotPosition, pointPosition, dirDirection, lightType);
+ vec4 lightCol = computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPosition, spotDecay, spotPosition, spotConeIn, spotConeOut, lightDir, lightType);
 
  vec4 diffuse = computeDiffuse(lightDir, lightCol, nNormal, diffLColor, diffTColor,diffONColor, nEyeDirection, lightDiffuseType);
 

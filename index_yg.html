@@ -156,12 +156,23 @@
                             <label for="spotColor">Color</label>
 
                             <br>
+                            <input type="range" min="-1000" max="1000" name="spotPosX" id="spotPosX"
+                                onchange="setSlider(this.value, 'spotPosX')">
+                            <label for="spotPosX"> Pos X</label>
 
-                            <input type="range" min="-20" max="20" name="spotPosY" id="spotPosY"
+                            <br>
+
+                            <input type="range" min="-1000" max="1000" name="spotPosY" id="spotPosY"
                                 onchange="setSlider(this.value, 'spotPosY')">
                             <label for="spotPosY"> Pos Y</label>
 
                             <br>
+                            <input type="range" min="-1000" max="1000" name="spotPosZ" id="spotPosZ"
+                                onchange="setSlider(this.value, 'spotPosZ')">
+                            <label for="spotPosZ"> Pos Z</label>
+
+                            <br>
+
 
                             <input type="range" min="0.0" max="2.0" name="spotDecay" id="spotDecay"
                                 onchange="setSlider(this.value, 'spotDecay')">
@@ -209,7 +220,7 @@
                     <div id="ambient" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-ambient">Type</label>
-                            <select id="lightAmbient" name="l-ambient" onchange="changeSelection(ambientSelection,this.value,'lightAmbientType',7);">
+                            <select id="lightAmbientType" name="l-ambient" onchange="changeSelection(ambientSelection,this.value,'lightAmbientType',7);">
                                 <option value="ambientambient">Ambient</option>
                                 <option value="ambienthemispheric">Hemispheric</option>
                                 <option value="ambientnone">None</option>
@@ -260,7 +271,7 @@
                     <div id="diffuse" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-diffuse">Type</label>
-                            <select id="lightDiffuse" name="l-diffuse" onchange="changeSelection(diffuseSelection,this.value,'lightDiffuseType',7);">
+                            <select id="lightDiffuseType" name="l-diffuse" onchange="changeSelection(diffuseSelection,this.value,'lightDiffuseType',7);">
                                 <option value="diffuselambert">Lambert</option>
                                 <option value="diffusetoon">Toon</option>
                                 <option value="diffuseoren">Oren-Nayar</option>
@@ -324,7 +335,7 @@
                     <div id="specular" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-specular">Type</label>
-                            <select id="lightSpecular" name="l-specular" onchange="changeSelection(specularSelection,this.value,'lightSpecularType',8);">
+                            <select id="lightSpecularType" name="l-specular" onchange="changeSelection(specularSelection,this.value,'lightSpecularType',8);">
                                 <option value="specularphong">Phong</option>
                                 <option value="specularblinn">Blinn</option>
                                 <option value="speculartoonPhong">Toon (Phong)</option>
