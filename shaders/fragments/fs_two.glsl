@@ -194,10 +194,6 @@ vec4 computeMatAmbColor(float lType,vec4 textureColor){
 }
 void main() {
 
-
-// vec3 spotPosition = vec3(0, 10, 0);
- //vec3 finalSpotPosition = spotPosition + vec3(0.0, spotPosY*1.5, 0.0);
-
  vec3 eyePosition = vec3(0.0,0.0,0.0);
  vec3 nEyeDirection = normalize(eyePosition - fs_position);
 
@@ -210,7 +206,7 @@ void main() {
  vec4 ambientMatColor = computeMatAmbColor(lightDiffuseType, textureColor);
 
  vec3 lightDir = computeLightDir(spotPosition, pointPosition, dirDirection, lightType);
- vec4 lightCol = computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPosition, spotDecay, spotPosition, spotConeIn/100.0, spotConeOut, lightDir, lightType);
+ vec4 lightCol = computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPosition, spotDecay, spotPosition, spotConeIn, spotConeOut, lightDir, lightType);
 
  vec4 diffuse = computeDiffuse(lightDir, lightCol, nNormal, diffLColor, diffTColor,diffONColor, nEyeDirection, lightDiffuseType);
 
