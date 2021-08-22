@@ -210,7 +210,7 @@ void main() {
  vec4 ambientMatColor = computeMatAmbColor(lightDiffuseType, textureColor);
 
  vec3 lightDir = computeLightDir(spotPosition, pointPosition, dirDirection, lightType);
- vec4 lightCol = computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPosition, spotDecay, spotPosition, spotConeIn, spotConeOut, lightDir, lightType);
+ vec4 lightCol = computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPosition, spotDecay, spotPosition, spotConeIn/100.0, spotConeOut, lightDir, lightType);
 
  vec4 diffuse = computeDiffuse(lightDir, lightCol, nNormal, diffLColor, diffTColor,diffONColor, nEyeDirection, lightDiffuseType);
 
