@@ -162,7 +162,7 @@
 
                             <br>
 
-                            <input type="range" min="15" max="100" name="spotPosY" id="spotPosY"
+                            <input type="range" min="15" max="25" name="spotPosY" id="spotPosY"
                                 onchange="setSlider(this.value, 'spotPosY')">
                             <label for="spotPosY"> Pos Y</label>
 
@@ -184,17 +184,17 @@
                                 onchange="setSlider(this.value, 'spotTarget')">
                             <label for="spotTarget"> Target distance</label>
 
-                            <!-- No need to edit them.
-                  <input type="range" min="0" max="360" name="spotTheta" id="spotTheta"
-                  onchange="setSlider(this.value, 'spotTheta')">
-                  <label for="spotTheta"> Dir &theta;</label>
+                            <br>
+                            <input type="range" min="0" max="180" name="spotTheta" id="spotTheta"
+                                onchange="setSlider(this.value, 'spotTheta')">
+                            <label for="spotTheta"> Dir &theta;</label>
 
-                  <br>
+                            <br>
 
-                  <input type="range" min="0" max="360" name="spotPhi" id="spotPhi"
-                  onchange="setSlider(this.value, 'spotPhi')">
-                  <label for="spotPhi"> Dir &phi;</label>
-                  -->
+                            <input type="range" min="-180" max="180" name="spotPhi" id="spotPhi"
+                                onchange="setSlider(this.value, 'spotPhi')">
+                            <label for="spotPhi"> Dir &phi;</label>
+
 
                             <br>
 
@@ -203,7 +203,6 @@
                             <label for="spotConeIn"> Cone in</label>
 
                             <br>
-
                             <input type="range" min="0" max="150" name="spotConeOut" id="spotConeOut"
                                 onchange="setSlider(this.value, 'spotConeOut')">
                             <label for="spotConeOut"> Cone out</label>
@@ -216,7 +215,7 @@
 
                     </div>
 
-                    <!-- Display if Ambient is selected-->
+                    <!-- Ambient Types-->
                     <div id="ambient" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-ambient">Type</label>
@@ -227,47 +226,36 @@
                             </select>
                         </div>
                         <br>
-
-                        <!-- Display if Ambient -> Ambient is selected-->
+                        <!-- Ambient Display-->
                         <div id="ambientambient" style="display: block;">
                             <input type="color" id="ambientColor" name="ambientColor" value="#000000"
                                 onchange="setColor(this.value, 'ambientColor')">
                             <label for="ambientColor">Color</label>
                         </div>
-
-                        <!-- Display if Ambient -> Hemispheric is selected-->
                         <div id="ambienthemispheric" style="display: none;">
                             <input type="color" id="ambientUpperColor" name="ambientUpperColor" value="#000000"
                                 onchange="setColor(this.value, 'ambientUpperColor')">
                             <label for="ambientUpperColor">Upper</label>
-
                             <br>
-
                             <input type="color" id="ambientLowerColor" name="ambientLowerColor" value="#000000"
                                 onchange="setColor(this.value, 'ambientLowerColor')">
                             <label for="ambientLowerColor">Lower</label>
-
                             <br>
-
                             <input type="range" min="0" max="180" name="hemisphericTheta" id="hemisphericTheta"
                                 onchange="setSlider(this.value, 'hemisphericTheta')">
                             <label for="hemisphericTheta"> Dir &theta;</label>
-
                             <br>
-
                             <input type="range" min="-180" max="180" name="hemisphericPhi" id="hemisphericPhi"
                                 onchange="setSlider(this.value, 'hemisphericPhi')">
                             <label for="hemisphericPhi"> Dir &phi;</label>
 
                         </div>
-
-                        <!-- Display if Ambient -> None is selected-->
                         <div id="ambientnone" style="display: none;">
                             <!-- Nothing to display-->
                         </div>
                     </div>
 
-                    <!-- Display if Diffuse is selected-->
+                    <!-- Diffuse Types-->
                     <div id="diffuse" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-diffuse">Type</label>
@@ -279,8 +267,7 @@
                             </select>
                         </div>
                         <br>
-
-                        <!-- Display if Diffuse -> Lambert is selected-->
+                        <!-- Diffuse Display-->
                         <div id="diffuselambert" style="display: block;">
                             <input type="color" id="lambertColor" name="lambertColor" value="#000000"
                                 onchange="setColor(this.value, 'lambertColor')">
@@ -292,46 +279,38 @@
                                 onchange="setSlider(this.value, 'lambertTexture')">
                             <label for="lambertTexture"> Texture</label>
                         </div>
-
-                        <!-- Display if Diffuse -> Toon is selected-->
                         <div id="diffusetoon" style="display: none;">
                             <input type="color" id="toonColor" name="toonColor" value="#000000"
                                 onchange="setColor(this.value, 'toonColor')">
                             <label for="toonColor">Color</label>
-
                             <br>
-
                             <input type="range" min="0" max="100" name="toonTexture" id="toonTexture"
                                 onchange="setSlider(this.value, 'toonTexture')">
                             <label for="toonTexture"> Texture</label>
-
                             <br>
-
-                            <input type="range" min="0" max="100" name="toonThr" id="toonThr" style="display: none;"
+                            <input type="range" min="0" max="100" name="toonThr" id="toonThr"
                                 onchange="setSlider(this.value, 'toonThr')">
-                            <label for="toonThr" style="display: none;"> Toon thr.</label>
+                            <label for="toonThr"> Toon thr.</label>
                         </div>
                         <div id="diffuseoren" style="display: block;">
                             <input type="color" id="orenColor" name="orenColor" value="#000000"
                                 onchange="setColor(this.value, 'orenColor')">
                             <label for="orenColor">Color</label>
-
                             <br>
-
                             <input type="range" min="0" max="100" name="orenTexture" id="orenTexture"
                                 onchange="setSlider(this.value, 'orenTexture')">
                             <label for="orenTexture"> Texture</label>
+                            <br>
                             <input type="range" min="0" max="100" name="orenRoughness" id="orenRoughness"
                                 onchange="setSlider(this.value,'orenRoughness')">
                             <label for="orenRoughness"> Roughness</label>
                         </div>
-                        <!-- Display if Diffuse -> None is selected-->
                         <div id="diffusenone" style="display: none;">
                             <!-- Nothing to display-->
                         </div>
                     </div>
 
-                    <!-- Display if Specular is selected-->
+                    <!-- Specular Types-->
                     <div id="specular" style="display: none;">
                         <div style="text-align:center">
                             <label for="l-specular">Type</label>
@@ -344,8 +323,7 @@
                             </select>
                         </div>
                         <br>
-
-                        <!-- Display if Specular -> Phong is selected-->
+                        <!--Specular Displays-->
                         <div id="specularphong" style="display: block;">
 
                             <input type="color" id="phongColor" name="phongColor" value="#000000"
@@ -358,8 +336,6 @@
                                 onchange="setSlider(this.value, 'phongShiny')">
                             <label for="phongShiny"> Shiny </label>
                         </div>
-
-                        <!-- Display if Specular -> Blinn is selected-->
                         <div id="specularblinn" style="display: none;">
                             <input type="color" id="blinnColor" name="blinnColor" value="#000000"
                                 onchange="setColor(this.value, 'blinnColor')">
@@ -371,8 +347,6 @@
                                 onchange="setSlider(this.value, 'blinnShiny')">
                             <label for="blinnShiny"> Shiny </label>
                         </div>
-
-                        <!-- Display if Specular -> Toon (phong) is selected-->
                         <div id="speculartoonPhong" style="display: none;">
                             <input type="color" id="toonPColor" name="toonPColor" value="#000000"
                                 onchange="setColor(this.value, 'toonPColor')">
@@ -384,8 +358,6 @@
                                 onchange="setSlider(this.value, 'toonPThr')">
                             <label for="toonPThr">Threshold</label>
                         </div>
-
-                        <!-- Display if Specular -> Toon (blinn) is selected-->
                         <div id="speculartoonBlinn" style="display: none;">
                             <input type="color" id="toonBColor" name="toonBColor" value="#000000"
                                 onchange="setColor(this.value, 'toonBColor')">
@@ -399,24 +371,9 @@
                             <br>
 
                         </div>
-
-                        <!-- Display if Diffuse -> None is selected-->
                         <div id="specularnone" style="display: none;">
-                            <!-- Nothing to display-->
                         </div>
                     </div>
-                    <!--<tr>
-                        <br>
-                        <p>Export light settings:</p>
-                        <!-- Download lights button
-                        <button id="saveLights" onclick="DownloadLights()">Export lights</button>
-                    </tr>
-                    <tr>
-                        <br>
-                        <p>Load lights settings</p>
-                        <input type="file" id="fileinput" accept="application/JSON">
-                        <input type="button" id="btnLoad" value="Submit" onclick="loadFile();">
-                    </tr>-->
                 </table>
             </div>
     </table>

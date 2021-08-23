@@ -18,9 +18,6 @@ uniform float lightAmbientType;
 uniform float lightDiffuseType;
 uniform float lightSpecularType;
 
-// Colors
-
-
 // Direct
 uniform vec4 directColor;
 uniform vec3 dirDirection;
@@ -34,7 +31,7 @@ uniform float pointTarget;
 // Spot
 uniform vec4 spotColor;
 uniform vec3 spotPosition;
-//uniform float spotPosY;
+uniform float initialSpotY;
 uniform float spotDecay;
 uniform float spotTarget;
 uniform vec3 spotDir;
@@ -95,7 +92,7 @@ vec3 computeLightDir(vec3 spot_position, vec3 point_position, vec3 Dir, float lT
 
 // Compute light color
 //computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPosition, spotDecay, finalSpotPosition, spotConeIn/100.0, spotConeOut, lightDir, lightType);
-vec4 computeLightColor(vec4 dColor, vec4 spotColor, vec4 pointColor, float pDecay, vec3 pPos, float lDecay, vec3 spotPosition, float lConeIn, float lConeOut, vec3 dir, float lType) {
+vec4 computeLightColor(vec4 dColor, vec4 spotColor, vec4 pointColor, float pDecay, vec3 pPos, float lDecay, vec3 spot_position, float lConeIn, float lConeOut, vec3 dir, float lType) {
   if (lType == 0.0) {
     // Direct
     return dColor;
@@ -108,7 +105,7 @@ vec4 computeLightColor(vec4 dColor, vec4 spotColor, vec4 pointColor, float pDeca
     float LCosIn = cos(radians(lConeOut * lConeIn / 2.0));
     vec3 spotLightDir = normalize(spotPosition - fs_position);
     float cosAngle = dot(spotLightDir, spotDir);
-    return spotColor * pow(spotTarget/length(spotPosition - fs_position), lDecay) * clamp(((cosAngle - LCosOut) / (LCosIn - LCosOut)), 0.0, 1.0);
+    return spotColor * pow(spotTarget/length(spot_position - fs_position), lDecay) * clamp(((cosAngle - LCosOut) / (LCosIn - LCosOut)), 0.0, 1.0);
     } else {
     return dColor * vec4(0.0, 0.0, 0.0, 1.0);
   }
@@ -116,16 +113,16 @@ vec4 computeLightColor(vec4 dColor, vec4 spotColor, vec4 pointColor, float pDeca
 
 // Compute diffuse light
 //computeDiffuse(lightDir, lightCol (from previous), nNormal, diffLColor, diffTColor,diffONColor, nEyeDirection, lightDiffuseType);
-vec4 computeDiffuse(vec3 lightDirection, vec4 lightColor, vec3 nVec, vec4 diffLColor, vec4 diffTColor,vec4 diffONColor, vec3 eyeVec, float lightDiffuseType) {
+vec4 computeDiffuse(vec3 lightDirection, vec4 lightColor, vec3 nVec, vec4 diffColor, vec3 eyeVec, float lightDiffuseType) {
   float dotN = max(0.0,dot(nVec, lightDirection));
   if(lightDiffuseType == 0.0) {//Lambert
-    vec4 col = lightColor * diffLColor;
+    vec4 col = lightColor * diffColor;
     return  col * dotN;
   }else if(lightDiffuseType == 1.0){//Toon
-    vec4 col = lightColor * diffTColor;
+    vec4 col = lightColor * diffColor;
     return max(sign(dotN- toonThr), 0.0) * col;
   }else if(lightDiffuseType == 2.0){//Oren Nayar
-    vec4 col = lightColor * diffONColor * dotN;
+    vec4 col = lightColor * diffColor * dotN;
     float VdotN = max(0.0, dot(nVec, eyeVec));
     float theta_i = acos(dotN);
     float theta_r = acos(VdotN);
@@ -192,23 +189,32 @@ vec4 computeMatAmbColor(float lType,vec4 textureColor){
     return ambientColor*0.0;
   }
 }
+vec4 computeDiffusedColor(float lType,vec4 textureColor){
+  if(lType == 0.0) {
+    return lambertColor * (1.0 - lambertTexture) + textureColor * (lambertTexture);//lambert
+  }else if(lType == 1.0){
+    return toonColor * (1.0-toonTexture) + textureColor * toonTexture;//toon
+  }else if(lType == 2.0){//Oren Nayar
+    return orenColor *(1.0-orenTexture) + textureColor * orenTexture;//oren nayar
+  }else{
+    return textureColor*0.0;
+  }
+}
 void main() {
-
+ vec3 newSpotPosition = vec3(spotPosition.x,spotPosition.y+initialSpotY,spotPosition.z);
  vec3 eyePosition = vec3(0.0,0.0,0.0);
  vec3 nEyeDirection = normalize(eyePosition - fs_position);
 
  vec3 nNormal = normalize(fs_normal);
  vec4 textureColor = texture(u_texture, fs_uv);
 
- vec4 diffLColor = lambertColor * (1.0 - lambertTexture) + textureColor * (lambertTexture);//lambert
- vec4 diffTColor = toonColor * (1.0-toonTexture) + textureColor * toonTexture;//toon
- vec4 diffONColor = orenColor *(1.0-orenTexture) + textureColor * orenTexture;//oren nayar
+ vec4 diffusedColor = computeDiffusedColor(lightDiffuseType,textureColor);
  vec4 ambientMatColor = computeMatAmbColor(lightDiffuseType, textureColor);
 
- vec3 lightDir = computeLightDir(spotPosition, pointPosition, dirDirection, lightType);
- vec4 lightCol = computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPosition, spotDecay, spotPosition, spotConeIn, spotConeOut, lightDir, lightType);
+ vec3 lightDir = computeLightDir(newSpotPosition, pointPosition, dirDirection, lightType);
+ vec4 lightCol = computeLightColor(directColor,spotColor, pointColor, pointDecay, pointPosition, spotDecay, newSpotPosition, spotConeIn, spotConeOut, lightDir, lightType);
 
- vec4 diffuse = computeDiffuse(lightDir, lightCol, nNormal, diffLColor, diffTColor,diffONColor, nEyeDirection, lightDiffuseType);
+ vec4 diffuse = computeDiffuse(lightDir, lightCol, nNormal, diffusedColor, nEyeDirection, lightDiffuseType);
 
  vec4 ambient = computeAmbient(ambientMatColor, nNormal, lightAmbientType);
 
