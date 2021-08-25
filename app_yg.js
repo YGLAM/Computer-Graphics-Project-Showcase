@@ -16,11 +16,6 @@ var main = function () {
     canvas.addEventListener("mouseup", myOnMouseUp, false);
 
     cameraScene();
-  //here was animate()
-  //here was camera scene()
-  //here was keyFunction(e)
-  //instead of normaliseVector(vec) we'll use utils.normalizeVector3(vec)
-  //here was myOnMouseUp()
 }
 
 var init = async function () {
@@ -29,6 +24,10 @@ var init = async function () {
     var page = path.split("/").pop();
     baseDir = window.location.href.replace(page, '');
     shaderDir = baseDir + "shaders/";
+    jp.parseModelInfos();
+    jp.parseLights();
+    jp.parsePositions();
+    console.log(infos);
 
     var canvas = document.getElementById("canvas");
     gl = canvas.getContext("webgl2");
@@ -36,11 +35,11 @@ var init = async function () {
         document.write("GL context not opened");
         return;
     }
+
     //program creation was once here
     await nodes.loadSceneAssets();
-    // gl.useProgram(program);
 
-    jp.parseLights();
+
     activeID = 1;
     updateGUI();
     console.log("I've updated the GUI");

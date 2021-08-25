@@ -1,0 +1,79 @@
+[
+  {
+      "id":           "boat",
+
+      "src":          "assets/boat/boat.obj",
+      "tx_src":       "assets/boat/boat_diffuse.bmp"
+  },
+  {
+      "id":           "pedestal",
+
+      "src":          "assets/pedestal/pedestal_viking.obj",
+      "tx_src":       "assets/scene/four/textures/texture.png"
+  },
+  {
+      "id":           "room",
+
+      "src":          "assets/scene/vikingroom2w.obj",
+      "tx_src":       "assets/scene/four/textures/texture.png"
+  },
+
+  {
+      "id":           "world",
+
+      "src":          "assets/world/world.obj",
+      "tx_src":       "assets/world/world.png"
+  },
+  {
+      "id":           "xwing",
+
+      "src":          "assets/xwing/xwing.obj",
+      "tx_src":       "assets/xwing/xwing.png"
+  },
+  {
+      "id":           "porygon",
+
+      "src":          "assets/porygon/porygon.obj",
+      "tx_src":       "assets/porygon/images/porygon_full.png"
+  },
+  {
+      "id":           "porygonshiny",
+
+      "src":          "assets/porygon/porygon.obj",
+      "tx_src":       "assets/porygon/images/porygon_shiny.png"
+  },
+  {
+      "id":           "porygon2",
+
+      "src":          "assets/porygon2/porygon2.obj",
+      "tx_src":       "assets/porygon2/images/porygon2_full.png"
+  },
+  {
+      "id":           "porygon2shiny",
+
+      "src":          "assets/porygon2/porygon2.obj",
+      "tx_src":       "assets/porygon2/images/porygon2_shiny.png"
+  },
+  {
+      "id":           "porygonz",
+
+      "src":          "assets/porygonz/porygonz.obj",
+      "tx_src":       "assets/porygonz/images/porygonz_full.png"
+  },
+  {
+      "id":           "porygonzshiny",
+
+      "src":          "assets/porygonz/porygonz.obj",
+      "tx_src":       "assets/porygonz/images/porygonz_shiny.png"
+  },
+  {
+    "id": "walkman",
+    "src": "assets/walkman/walkman.obj",
+    "tx_src": "assets/walkman/images/walkman.png"
+  },
+  {
+    "id": "tv",
+    "src": "assets/tv/tv.obj",
+    "tx_src": "assets/tv/images/tv.png"
+  }
+]

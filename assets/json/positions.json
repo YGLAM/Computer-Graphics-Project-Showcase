@@ -1,0 +1,35 @@
+[
+    {
+        "id":               1,
+        "name":          "boat",
+
+        "requiresPed":    1,
+        "pedPos":        [-23.9,13.2,1.7],
+        "pedScale":        6.7,
+
+        "modelPos":      [ 0.0,5.0,0.0],
+        "modelScale":      0.01
+    },
+    {
+        "id":               2,
+        "name":          "tv",
+
+        "requiresPed":    1,
+        "pedPos":        [ -0.63,16.73,0.05],
+        "pedScale":        8.33,
+
+        "modelPos":      [ 0.0,5.0,0.0],
+        "modelScale":      2.5
+      },
+    {
+        "id":               3,
+        "name":          "boat",
+
+        "requiresPed":    1,
+        "pedPos":        [ 27.1,13.78,-5.1],
+        "pedScale":        8.2,
+
+        "modelPos":      [ 0.0,5.0,0.0],
+        "modelScale":      0.01
+    }
+]

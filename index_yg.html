@@ -59,11 +59,24 @@
                         </p>
                     </tr>
                     <tr>
+                      <div style="text-align:left">
+                          <label for="modelSelection">Model:</label>
+                          <select id="modelSelection" name="modelSelection" style="display: block"
+                              onchange="changeModel(this.value);">
+                              <option value="boat">Boat</option>
+                              <option value="car">Car</option>
+                              <option value="xwing">X-Wing</option>
+                              <option value="porygon">Porygon</option>
+                              <option value="world">Globe</option>
+                          </select>
+                      </div>
+                      <!--
                         <div style="text-align:left" >
                           <p><h3> Current Model:</h3>
                           <div style="text-align:left" id ="currentModel">
                           </p></div>
                         </div>
+                      -->
                     </tr>
                     <br>
                     <tr>
