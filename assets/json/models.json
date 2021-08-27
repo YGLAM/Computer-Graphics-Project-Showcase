@@ -3,77 +3,95 @@
       "id":           "boat",
 
       "src":          "assets/boat/boat.obj",
-      "tx_src":       "assets/boat/boat_diffuse.bmp"
+      "tx_src":       "assets/boat/images/boat.bmp",
+      "scale":        0.01
   },
   {
       "id":           "pedestal",
 
       "src":          "assets/pedestal/pedestal_viking.obj",
-      "tx_src":       "assets/scene/four/textures/texture.png"
+      "tx_src":       "assets/pedestal/images/pedestal.png",
+      "scale":        8.3
+
   },
   {
       "id":           "room",
 
       "src":          "assets/scene/vikingroom2w.obj",
-      "tx_src":       "assets/scene/four/textures/texture.png"
+      "tx_src":       "assets/scene/images/vikingroom2w.png",
+      "scale": 10
   },
 
   {
       "id":           "world",
 
       "src":          "assets/world/world.obj",
-      "tx_src":       "assets/world/world.png"
+      "tx_src":       "assets/world/images/world.png",
+      "scale": 1.5
   },
   {
       "id":           "xwing",
 
       "src":          "assets/xwing/xwing.obj",
-      "tx_src":       "assets/xwing/xwing.png"
+      "tx_src":       "assets/xwing/images/xwing.png",
+      "scale": 1.8
   },
   {
       "id":           "porygon",
 
       "src":          "assets/porygon/porygon.obj",
-      "tx_src":       "assets/porygon/images/porygon_full.png"
+      "tx_src":       "assets/porygon/images/porygon.png",
+      "scale":        3
+
   },
   {
       "id":           "porygonshiny",
 
       "src":          "assets/porygon/porygon.obj",
-      "tx_src":       "assets/porygon/images/porygon_shiny.png"
+      "tx_src":       "assets/porygon/images/porygon_shiny.png",
+      "scale":        3
+
   },
   {
       "id":           "porygon2",
 
       "src":          "assets/porygon2/porygon2.obj",
-      "tx_src":       "assets/porygon2/images/porygon2_full.png"
+      "tx_src":       "assets/porygon2/images/porygon2.png",
+      "scale":        1.2
+
   },
   {
       "id":           "porygon2shiny",
 
       "src":          "assets/porygon2/porygon2.obj",
-      "tx_src":       "assets/porygon2/images/porygon2_shiny.png"
+      "tx_src":       "assets/porygon2/images/porygon2_shiny.png",
+      "scale": 1.2
   },
   {
       "id":           "porygonz",
 
       "src":          "assets/porygonz/porygonz.obj",
-      "tx_src":       "assets/porygonz/images/porygonz_full.png"
+      "tx_src":       "assets/porygonz/images/porygonz.png",
+      "scale":         2.5
   },
   {
       "id":           "porygonzshiny",
 
       "src":          "assets/porygonz/porygonz.obj",
-      "tx_src":       "assets/porygonz/images/porygonz_shiny.png"
+      "tx_src":       "assets/porygonz/images/porygonz_shiny.png",
+      "scale":         2.5
   },
   {
     "id": "walkman",
     "src": "assets/walkman/walkman.obj",
-    "tx_src": "assets/walkman/images/walkman.png"
+    "tx_src": "assets/walkman/images/walkman.png",
+    "scale" : 0.75
   },
   {
     "id": "tv",
     "src": "assets/tv/tv.obj",
-    "tx_src": "assets/tv/images/tv.png"
+    "tx_src": "assets/tv/images/tv.png",
+    "scale":        2.5
+
   }
 ]

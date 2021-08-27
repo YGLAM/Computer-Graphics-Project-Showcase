@@ -1,14 +1,14 @@
 [
     {
         "id":               1,
-        "name":          "boat",
+        "name":          "porygon",
 
         "requiresPed":    1,
         "pedPos":        [-23.9,13.2,1.7],
         "pedScale":        6.7,
 
-        "modelPos":      [ 0.0,5.0,0.0],
-        "modelScale":      0.01
+        "modelPos":      [ 0.0,3.0,0.0],
+        "modelScale":      3
     },
     {
         "id":               2,
