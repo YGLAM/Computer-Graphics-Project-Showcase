@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>Showcase</title>
     <style type="text/css">
         body {
@@ -15,7 +16,7 @@
             display: block;
         }
     </style>
-    <script src="app_yg.js"></script>
+    <script src="app.js"></script>
     <!-- Loading libraries.. -->
     <script src="lib/utils.js"></script>
     <script type="text/javascript" src="lib/webgl-obj-loader.min.js"></script>
@@ -47,8 +48,8 @@
                 style="position: absolute;
                  z-index: 1;
                  right: 1em; top: 2em;
-                 width:325px; height:50%;
-                 background-color: white; border-style: solid; border-color: yellow; opacity: 0.5; padding: 5px 10px 5px 10px; overflow:auto; text-align:center">
+                 width:320px; height:50%;
+                 background-color: white; border-style: solid; opacity: 0.8; padding: 5px 5px 5px 5px; overflow:auto; text-align:center">
                 <table>
                     <tr>
                         <p>
@@ -167,7 +168,7 @@
 
                             <br>
 
-                            <input type="range" min="15" max="25" name="spotPosY" id="spotPosY"
+                            <input type="range" min="15" max="100" name="spotPosY" id="spotPosY"
                                 onchange="setSlider(this.value, 'spotPosY')">
                             <label for="spotPosY"> Pos Y</label>
 
