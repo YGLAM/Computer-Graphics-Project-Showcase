@@ -5,11 +5,18 @@ _Computer Graphics 2021 exam project at Politecnico di Milano._
 Imagine a shop window in which there are several objects on pedestals. You will have to present several pedestals with objects showing off different rendering techniques. It must be possible to select (with the keyboard) one of the pedestals to inspect it more closely. Optional (improved evaluation): use raycast to select the pedestal to inspect.
 
 ## Description
+### Implementation
+We were tasked to work with camera space coordinates, we also implemented both keyboard and mouse controls through a raycast algorithm
 ### Assets
-_Boat_, _World_ and _Xwing_ were given by the professor, all the other assets were downloaded from internet and edited with blender if needed.
+_Boat_, _World_ and _Xwing_ were given by the professor, all the other assets were downloaded and had their UV maps edited with blender if needed:
+- [Room](https://sketchfab.com/3d-models/viking-room-a49f1b8e4f5c4ecf9e1fe7d81915ad38) model by nigelgoh, the pedestal model was reused from the scene
+- [Sony Walkman](https://sketchfab.com/3d-models/walkman-1e8296b489084d6ba76b485d1c2fd37c) by Tom Seddon
+- [Porygon](https://free3d.com/3d-model/porygon-pokemon-73631.html) from Pokémon X/Y
+- [Porygon](https://free3d.com/3d-model/porygon2-pokemon-84049.html) from Pokémon X/Y
+- [PorygonZ](https://free3d.com/3d-model/porygon-z-pokemon-11318.html) from Pokémon X/Y
 
 ### Demo
-The project can be found [HERE](https://yglam.github.io/CG2021_Alt/) (textures may take some time to load).
+The project can be found [here](https://yglam.github.io/CG2021_Alt/),please note that textures may take some time to load.
 
 ### Controls
 While in the default view:
