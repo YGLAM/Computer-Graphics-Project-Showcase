@@ -11,7 +11,7 @@ _Boat_, _World_ and _Xwing_ were given by the professor, all the other assets we
 ### Demo
 The project can be found [HERE](https://yglam.github.io/CG2021_Alt/) (textures may take some time to load).
 
-#### Controls
+### Controls
 While in the default view:
 - To examine an object, press <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> or click on it
 - To reset the view, press <kbd>esc</kbd> or click on the object surroundings
@@ -19,4 +19,4 @@ While in the default view:
 - Press <kbd>U</kbd><kbd>H</kbd><kbd>J</kbd><kbd>K</kbd> to rotate the camera angle
 - Press <kbd>Z</kbd><kbd>X</kbd> to move the camera forward and backward
 - Press <kbd>R</kbd> to reset the camera
-- Press <kbd>0</kbd> to open the room lighting menu and click anywhere to close it
+- Press <kbd>0</kbd> to open the room lighting menu and click anywhere or press <kbd>esc</kbd> to close it
