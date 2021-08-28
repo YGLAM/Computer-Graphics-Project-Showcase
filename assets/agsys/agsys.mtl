@@ -1,0 +1,14 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl Livery
+Ns 374.950425
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\Users\\giuse\\Downloads\\ag-systems-wipeout-f3600-league\\source\\mnt\\8800D97F00D97522\\Projects\\Active\\01_AG Systems Prototype\\07_Renders\\_tex\\Skin_NRM.png
+map_Kd C:\\Users\\giuse\\Downloads\\ag-systems-wipeout-f3600-league\\AGSys.png

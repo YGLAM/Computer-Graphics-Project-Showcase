@@ -14,6 +14,8 @@ _Boat_, _World_ and _Xwing_ were given by the professor, all the other assets we
 - [Porygon](https://free3d.com/3d-model/porygon-pokemon-73631.html) from Pokémon X/Y
 - [Porygon](https://free3d.com/3d-model/porygon2-pokemon-84049.html) from Pokémon X/Y
 - [PorygonZ](https://free3d.com/3d-model/porygon-z-pokemon-11318.html) from Pokémon X/Y
+- [AG Systems Wipeout Ship](https://sketchfab.com/3d-models/ag-systems-wipeout-f3600-league-7de12310c66b449d9c5aec205cba85ce)  by N-GONE
+
 
 ### Demo
 The project can be found [here](https://yglam.github.io/CG2021_Alt/),please note that textures may take some time to load.

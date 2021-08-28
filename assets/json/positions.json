@@ -23,7 +23,7 @@
       },
     {
         "id":               3,
-        "name":          "boat",
+        "name":          "agsys",
 
         "requiresPed":    1,
         "pedPos":        [ 27.1,13.78,-5.1],

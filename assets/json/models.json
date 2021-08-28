@@ -93,5 +93,11 @@
     "tx_src": "assets/tv/images/tv.png",
     "scale":        2.5
 
+  },
+  {
+    "id":"agsys",
+    "src":"assets/agsys/agsys.obj",
+    "tx_src":"assets/agsys/images/AGSys.png",
+    "scale": 1.3
   }
 ]
