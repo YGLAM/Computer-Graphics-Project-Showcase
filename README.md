@@ -12,7 +12,7 @@ _Boat_, _World_ and _Xwing_ were given by the professor, all the other assets we
 - [Room](https://sketchfab.com/3d-models/viking-room-a49f1b8e4f5c4ecf9e1fe7d81915ad38) model by nigelgoh, the pedestal model was reused from the scene
 - [Sony Walkman](https://sketchfab.com/3d-models/walkman-1e8296b489084d6ba76b485d1c2fd37c) by Tom Seddon
 - [Porygon](https://free3d.com/3d-model/porygon-pokemon-73631.html) from Pokémon X/Y
-- [Porygon](https://free3d.com/3d-model/porygon2-pokemon-84049.html) from Pokémon X/Y
+- [Porygon2](https://free3d.com/3d-model/porygon2-pokemon-84049.html) from Pokémon X/Y
 - [PorygonZ](https://free3d.com/3d-model/porygon-z-pokemon-11318.html) from Pokémon X/Y
 - [AG Systems Wipeout Ship](https://sketchfab.com/3d-models/ag-systems-wipeout-f3600-league-7de12310c66b449d9c5aec205cba85ce)  by N-GONE
 
