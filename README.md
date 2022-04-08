@@ -18,7 +18,7 @@ _Boat_, _World_ and _Xwing_ were given by the professor, all the other assets we
 
 
 ### Demo
-The project can be found [here](https://yglam.github.io/Computer-Graphics-Project-Showcase/),please note that textures may take some time to load.
+The project can be found [here](https://yglam.github.io/Computer-Graphics-Project-Showcase/), please note that textures may take some time to load.
 
 ### Controls
 While in the default view:
